@@ -1,5 +1,19 @@
 @import '';
 
+/* /Pages/Dashboard.razor.rz.scp.css */
+#wrapper[b-gi90vsa0ba] {
+    width: 500px;
+    border: 1px solid black;
+}
+
+#first[b-gi90vsa0ba] {
+    width: 300px;
+    border: 1px solid red;
+}
+
+#second[b-gi90vsa0ba] {
+    border: 1px solid green;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-ifq1lep90a] {
     position: relative;

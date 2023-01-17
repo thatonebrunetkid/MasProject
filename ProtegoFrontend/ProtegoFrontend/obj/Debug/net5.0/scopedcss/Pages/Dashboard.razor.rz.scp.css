@@ -1,0 +1,13 @@
+#wrapper[b-gi90vsa0ba] {
+    width: 500px;
+    border: 1px solid black;
+}
+
+#first[b-gi90vsa0ba] {
+    width: 300px;
+    border: 1px solid red;
+}
+
+#second[b-gi90vsa0ba] {
+    border: 1px solid green;
+}

@@ -1,0 +1,6 @@
+1;Opel
+2;BMW
+3;Ford
+4;Scania
+5;Man
+6;Ducati

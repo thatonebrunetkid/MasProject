@@ -1,0 +1,3 @@
+1;Adam;Testowy;99032209176; ; ;Wrocław;08-999;Sienkiewicza;15;3;5674321123; 
+2; ; ; ;BudTrans;9876543;Warszawa;05-765;Słomiana;25;4;123456789;budTrans@gmail.com
+3;Franek;Konieczny;1234567890; ; ;Katowice;05-180;Odrowąża;18;12;987234651;franek.konieczny@wp.pl

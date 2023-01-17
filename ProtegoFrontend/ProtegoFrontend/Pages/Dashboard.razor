@@ -1,0 +1,103 @@
+﻿@page "/Dashboard/{CustomerId:int}"
+@using MasProjekt.Backoffice.Models.Customers
+
+<style>
+    body{
+        background-color: rgb(239, 239, 239);
+    }
+</style>
+
+<div id="wrapper">
+    <div id="first">
+        <h1 style="font-family: Arial">Customer information</h1>
+        <div id style="background-color: white; border-radius: 25px; box-shadow: 10px 10px 5px lightblue">
+            @if (customer.GetCustomerData().Contains("NIP: "))
+            {
+                <table>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px; float: left">Company Name: </td>
+                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.CompanyName</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px; float: left">NIP: </td>
+                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.NIP</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px; float: left">Adress: </td>
+                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Adress.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px; float: left">Email: </td>
+                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Email</td>
+                    </tr>
+                </table>
+            }
+            @if (customer.GetCustomerData().Contains("Pesel: "))
+            {
+                <table>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px; float: left">  Name: </td>
+                        <td style="font-family: Arial; font-size: 24px;">@retailCustomer.Name</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px">  Surname: </td>
+                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Surname</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px">  PESEL: </td>
+                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Pesel</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px">  Number: </td>
+                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.ContactNumber</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px">  Email: </td>
+                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Email</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 24px">  Adress: </td>
+                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Adress.ToString()</td>
+                    </tr>
+                </table>
+            }
+
+        </div>
+    </div>
+    <div id="second">
+        <div id style="background-color: white; border-radius: 25px; box-shadow: 10px 10px 5px lightblue">
+            <table>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px; float: left">This customer bought: </td>
+                    <td style="font-family: Arial; font-size: 24px; float: left">@GetBoughtProductsNumber() products</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+    @code {
+        [Parameter]
+        public int CustomerId { get; set; }
+        private Customer customer;
+        private RetailCustomer retailCustomer;
+        private CorpoCustomer corpoCustomer;
+
+
+        protected override void OnInitialized()
+        {
+            customer = Customer.Customers.First(e => e.CustomerId == CustomerId);
+            if(customer.GetCustomerData().Contains("Pesel: "))
+                retailCustomer = (RetailCustomer)customer;
+            else
+                corpoCustomer = (CorpoCustomer)customer;
+        }
+
+        private int GetBoughtProductsNumber()
+        {
+            return customer.Insurances.Count();
+        }
+
+}

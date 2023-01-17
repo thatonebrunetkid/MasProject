@@ -1,0 +1,12 @@
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\bin\Debug\net5.0\ProtegoBackend.deps.json
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\bin\Debug\net5.0\ProtegoBackend.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\bin\Debug\net5.0\ProtegoBackend.pdb
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.csproj.AssemblyReference.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.AssemblyInfoInputs.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.AssemblyInfo.cs
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.csproj.CoreCompileInputs.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\refint\ProtegoBackend.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ProtegoBackend.pdb
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoBackend\obj\Debug\net5.0\ref\ProtegoBackend.dll

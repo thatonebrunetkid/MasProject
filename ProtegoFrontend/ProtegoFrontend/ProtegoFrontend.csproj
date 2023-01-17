@@ -5,8 +5,44 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Data\Brands — kopia.txt" />
+    <Content Remove="wwwroot\Data\Brands.txt" />
+    <Content Remove="wwwroot\Data\Customers — kopia.txt" />
+    <Content Remove="wwwroot\Data\Customers.txt" />
+    <Content Remove="wwwroot\Data\Insurances — kopia.txt" />
+    <Content Remove="wwwroot\Data\Insurances.txt" />
+    <Content Remove="wwwroot\Data\Models — kopia.txt" />
+    <Content Remove="wwwroot\Data\Models.txt" />
+    <Content Remove="wwwroot\Data\Vehicles — kopia.txt" />
+    <Content Remove="wwwroot\Data\Vehicles.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Connection\CustomersModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Assets\logo.png" />
+    <None Include="wwwroot\Assets\logo2.png" />
+    <None Include="wwwroot\Assets\mountains.png" />
+    <None Include="wwwroot\Data\Brands — kopia.txt" />
+    <None Include="wwwroot\Data\Brands.txt" />
+    <None Include="wwwroot\Data\Customers — kopia.txt" />
+    <None Include="wwwroot\Data\Customers.txt" />
+    <None Include="wwwroot\Data\Insurances — kopia.txt" />
+    <None Include="wwwroot\Data\Insurances.txt" />
+    <None Include="wwwroot\Data\Models — kopia.txt" />
+    <None Include="wwwroot\Data\Models.txt" />
+    <None Include="wwwroot\Data\Vehicles — kopia.txt" />
+    <None Include="wwwroot\Data\Vehicles.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.Typeahead" Version="4.6.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.17" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 

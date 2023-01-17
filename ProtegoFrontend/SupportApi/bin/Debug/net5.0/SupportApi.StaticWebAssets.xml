@@ -1,0 +1,6 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="/" Path="D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\wwwroot\" />
+  <ContentRoot BasePath="_content/Blazored.Typeahead" Path="C:\Users\mateu\.nuget\packages\blazored.typeahead\4.6.0\build\..\staticwebassets\" />
+</StaticWebAssets>

@@ -82,6 +82,34 @@ using ProtegoFrontend.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+using MasProjekt.Backoffice.Connection;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+using MasProjekt.Backoffice.Models.Customers;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+using Blazored.Typeahead;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+using ProtegoFrontend.wwwroot.sample_data;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -90,6 +118,32 @@ using ProtegoFrontend.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 40 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+      
+    private Customer customer;
+    protected async override void OnInitialized()
+    {
+        DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
+    }
+
+    private async Task<IEnumerable<Customer>> SearchCustomer(string searchText)
+    {
+        return await Task.FromResult(Customer.Customers.Where(x => x.ContactNumber.Contains(searchText)).ToList());
+    }
+
+    private void GetCustomerAndChangePage()
+    {
+        if (customer != null)
+            NavManager.NavigateTo($"/Dashboard/{customer.CustomerId}");
+    }
+
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
     }
 }
 #pragma warning restore 1591

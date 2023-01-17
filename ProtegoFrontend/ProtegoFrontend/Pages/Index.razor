@@ -1,7 +1,59 @@
 ﻿@page "/"
+@using MasProjekt.Backoffice.Connection
+@using MasProjekt.Backoffice.Models.Customers
+@using Blazored.Typeahead
+@using ProtegoFrontend.wwwroot.sample_data
+@inject HttpClient Http
+@inject NavigationManager NavManager
 
-<h1>Hello, world!</h1>
+<head>
+    <link href="_content/Blazored.Typehead/blazored-typehead.css" rel="stylesheet" />
+</head>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<body>
+<div style="text-align: center">
+    <img src="Assets/logo2.png" width="650"/>
+</div>
+<div style="text-align: center">
+    <h1 style="font-family: Arial; color:deepskyblue; text-align:center">Search customer</h1>
+</div>
+<div style="text-align: center">
+        <BlazoredTypeahead SearchMethod="SearchCustomer" @bind-Value="customer" placeholder="Search by phone number...">
+            <SelectedTemplate>
+                @context.ContactNumber
+            </SelectedTemplate>
+            <ResultTemplate>
+                @context.ContactNumber @context.Email
+            </ResultTemplate>
+        </BlazoredTypeahead>
+        <p></p>
+        <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" @onclick="GetCustomerAndChangePage">Select</button>
+</div>
+
+<div>
+    <img style="position:absolute; bottom:0; width:85%" src="Assets/mountains.png" />
+</div>
+
+</body>
+
+@code{
+    private Customer customer;
+    protected async override void OnInitialized()
+    {
+        DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
+    }
+
+    private async Task<IEnumerable<Customer>> SearchCustomer(string searchText)
+    {
+        return await Task.FromResult(Customer.Customers.Where(x => x.ContactNumber.Contains(searchText)).ToList());
+    }
+
+    private void GetCustomerAndChangePage()
+    {
+        if (customer != null)
+            NavManager.NavigateTo($"/Dashboard/{customer.CustomerId}");
+    }
+
+}
+
