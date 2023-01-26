@@ -1,13 +1,17 @@
 ﻿#wrapper {
-    width: 500px;
-    border: 1px solid black;
+    width: 100%;
+    overflow: hidden;
 }
 
 #first {
-    width: 300px;
-    border: 1px solid red;
+    width: auto;
+    float: left;
+    border-radius: 25px;
+    height: 50%;
 }
 
 #second {
-    border: 1px solid green;
+    overflow: hidden;
+    border-radius: 25px;
+    height: 50%;
 }

@@ -2,7 +2,7 @@
 @using MasProjekt.Backoffice.Connection
 @using MasProjekt.Backoffice.Models.Customers
 @using Blazored.Typeahead
-@using ProtegoFrontend.wwwroot.sample_data
+@using ProtegoFrontend.Connection
 @inject HttpClient Http
 @inject NavigationManager NavManager
 
@@ -32,7 +32,7 @@
 </div>
 
 <div>
-    <img style="position:absolute; bottom:0; width:85%" src="Assets/mountains.png" />
+    <img style="position:absolute; bottom:0; width:85%; height:30%" src="Assets/mountains.png" />
 </div>
 
 </body>
@@ -42,6 +42,10 @@
     protected async override void OnInitialized()
     {
         DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
+        DataManipulator.LoadBrandsData(await Http.GetFromJsonAsync<List<BrandsModel>>("sample-data/Brands.json"));
+        DataManipulator.LoadModelsData(await Http.GetFromJsonAsync<List<ModelsModel>>("sample-data/Models.json"));
+        DataManipulator.LoadVehiclesData(await Http.GetFromJsonAsync<List<VehiclesModel>>("sample-data/Vehicles.json"));
+        DataManipulator.LoadInsurancesData(await Http.GetFromJsonAsync<List<InsurancesModel>>("sample-data/Insurances.json"));
     }
 
     private async Task<IEnumerable<Customer>> SearchCustomer(string searchText)

@@ -3,7 +3,7 @@ using MasProjekt.Backoffice.Models.Customers;
 using MasProjekt.Backoffice.Models.Insurance;
 using MasProjekt.Backoffice.Models.Model;
 using MasProjekt.Backoffice.Models.Vehicle;
-using ProtegoFrontend.wwwroot.sample_data;
+using ProtegoFrontend.Connection;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -24,13 +24,10 @@ namespace MasProjekt.Backoffice.Connection
         private static readonly string ModelsFileLocation = "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoBackend\\Data\\Models.txt";
         private static readonly string InsurancesFileLocation = "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoBackend\\Data\\Insurances.txt";
 
-        public static void LoadData()
-        {
-            
-        }
 
         public static void LoadCustomerData(List<CustomersModel> CustomersList)
         {
+            if (Customer.Customers.Count() > 0) Customer.Customers.Clear();
             foreach(CustomersModel TempCustomer in CustomersList)
             {
                 if(TempCustomer.Pesel == " ")
@@ -47,122 +44,107 @@ namespace MasProjekt.Backoffice.Connection
             }
         }
 
-        private static void LoadVehiclesData()
+        public static void LoadBrandsData(List<BrandsModel> BrandsList)
         {
-            using(var reader = new StreamReader(VehicleFileLocation))
+            foreach(BrandsModel TempBrand in BrandsList)
             {
-                string line;
-                while((line = reader.ReadLine()) is not null)
-                {
-                    string[] buffer = line.Split(';');
-                    Customer TempCustomer = Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[11].ToString()));
-                    if (buffer[3].ToString().Count() > 1)
-                    {
-                        Motorbike TempMotorbike = new Motorbike(Int32.Parse(buffer[0].ToString()), DateTime.Parse(buffer[1].ToString()), buffer[2].ToString(), buffer[3].ToString());
-                        Vehicle.Vehicles.Add(TempMotorbike);
-                        TempCustomer.Vehicles.Add(TempMotorbike);
-                        TempMotorbike.Customer = TempCustomer;
-                        TempMotorbike.CustomerId = TempCustomer.CustomerId;
-                        TempMotorbike.Brand = Brand.Brands.First(e => e.BrandId == Int32.Parse(buffer[12].ToString()));
-                        TempMotorbike.Model = Model.Models.First(e => e.ModelId == Int32.Parse(buffer[13].ToString()));
-                    } else if (buffer[8].ToString().Count() > 1)
-                    {
-                        PersonalCar TempCar = new PersonalCar(Int32.Parse(buffer[0].ToString()), DateTime.Parse(buffer[1].ToString()), buffer[2].ToString(), buffer[4].ToString(), buffer[5].ToString(), DateTime.Parse(buffer[6].ToString()), Int32.Parse(buffer[7].ToString()), buffer[8].ToString() == "true" ? true : false, buffer[9].ToString() == "true" ? true : false);
-                        Vehicle.Vehicles.Add(TempCar);
-                        TempCustomer.Vehicles.Add(TempCar);
-                        TempCar.Customer = TempCustomer;
-                        TempCar.CustomerId = TempCustomer.CustomerId;
-                        TempCar.Brand = Brand.Brands.First(e => e.BrandId == Int32.Parse(buffer[12].ToString()));
-                        TempCar.Model = Model.Models.First(e => e.ModelId == Int32.Parse(buffer[13].ToString()));
-                    }
-                    else
-                    {
-                        Truck TempTruck = new Truck(Int32.Parse(buffer[0].ToString()), DateTime.Parse(buffer[1].ToString()), buffer[2].ToString(), buffer[4].ToString(), buffer[5].ToString(), DateTime.Parse(buffer[6].ToString()), Int32.Parse(buffer[7].ToString()), double.Parse(buffer[10].ToString()));
-                        Vehicle.Vehicles.Add(TempTruck);
-                        TempCustomer.Vehicles.Add(TempTruck);
-                        TempTruck.Customer = TempCustomer;
-                        TempTruck.CustomerId = TempCustomer.CustomerId;
-                        TempTruck.Brand = Brand.Brands.First(e => e.BrandId == Int32.Parse(buffer[12].ToString()));
-                        TempTruck.Model = Model.Models.First(e => e.ModelId == Int32.Parse(buffer[13].ToString()));
-                    }
-                }
-                reader.Close();
+                Brand Brand = new Brand(TempBrand.BrandId, TempBrand.Name);
+                Brand.Brands.Add(Brand);
             }
         }
 
-        private static void LoadBrandsData()
+        public static void LoadModelsData(List<ModelsModel> ModelsList)
         {
-            using(var reader = new StreamReader(BrandsFileLocation))
+            foreach(ModelsModel TempModel in ModelsList)
             {
-                string line;
-                while((line = reader.ReadLine()) is not null)
-                {
-                    string[] buffer = line.Split(';');
-                    Brand Brand = new Brand(Int32.Parse(buffer[0].ToString()), buffer[1].ToString());
-                    Brand.Brands.Add(Brand);
-                }
-                reader.Close();
+                Model Model = new Model(TempModel.ModelId, TempModel.Name, TempModel.ProductionStartDate, TempModel.ProductionEndDate, TempModel.Generation, TempModel.Equipment, TempModel.EngineCode);
+                Model.Brand = Brand.Brands.First(e => e.BrandId == TempModel.BrandId);
+                Brand.Brands.First(e => e.BrandId == TempModel.BrandId).Models.Add(Model);
+                Model.Models.Add(Model);
             }
         }
 
-        private static void LoadModelsData()
+        public static void LoadVehiclesData(List<VehiclesModel> VehicleList)
         {
-            using(var reader = new StreamReader(ModelsFileLocation))
+            foreach (VehiclesModel VehicleTemp in VehicleList)
             {
-                string line;
-                while((line = reader.ReadLine()) is not null)
+                Customer TempCustomer = Customer.Customers.First(e => e.CustomerId == VehicleTemp.CustomerId);
+                if (VehicleTemp.FrameNumber != "")
                 {
-                    string[] Buffer = line.Split(';');
-                    Model Model = new Model(Int32.Parse(Buffer[0].ToString()),Buffer[1].ToString(), DateTime.Parse(Buffer[2].ToString()), DateTime.Parse(Buffer[3].ToString()), Int32.Parse(Buffer[4].ToString()), Buffer[5].ToString(), Buffer[6].ToString());
-                    Model.Brand = Brand.Brands.First(e => e.BrandId == Int32.Parse(Buffer[7].ToString()));
-                    Brand.Brands.First(e => e.BrandId == Int32.Parse(Buffer[7].ToString())).Models.Add(Model);
-                    Model.Models.Add(Model);
+                    Motorbike Motorbike = new Motorbike(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlatesNumber, VehicleTemp.FrameNumber);
+                    Vehicle.Vehicles.Add(Motorbike);
+                    TempCustomer.Vehicles.Add(Motorbike);
+                    Motorbike.Customer = TempCustomer;
+                    Motorbike.CustomerId = TempCustomer.CustomerId;
+                    Motorbike.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
+                    Motorbike.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
                 }
-                reader.Close();
+                else if (VehicleTemp.MaximumAllowableAxleLoad != 0)
+                {
+                    PersonalCar TempCar = new PersonalCar(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlatesNumber, VehicleTemp.Vin, VehicleTemp.ImportCountry, VehicleTemp.FirstRegistrationDate, VehicleTemp.MileageCount, VehicleTemp.IsHook, VehicleTemp.IsLpg);
+                    Vehicle.Vehicles.Add(TempCar);
+                    TempCustomer.Vehicles.Add(TempCar);
+                    TempCar.Customer = TempCustomer;
+                    TempCar.CustomerId = TempCustomer.CustomerId;
+                    TempCar.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
+                    TempCar.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
+                }
+                else
+                {
+                    Truck TempTruck = new Truck(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlatesNumber, VehicleTemp.Vin, VehicleTemp.ImportCountry, VehicleTemp.FirstRegistrationDate, VehicleTemp.MileageCount, VehicleTemp.MaximumAllowableAxleLoad);
+                    Vehicle.Vehicles.Add(TempTruck);
+                    TempCustomer.Vehicles.Add(TempTruck);
+                    TempTruck.Customer = TempCustomer;
+                    TempTruck.CustomerId = TempCustomer.CustomerId;
+                    TempTruck.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
+                    TempTruck.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
+                }
             }
         }
 
-        public static void LoadInsurancesData()
+        public static void LoadInsurancesData(List<InsurancesModel> InsurancesList)
         {
-            using(var reader = new StreamReader(InsurancesFileLocation))
+            foreach(InsurancesModel insurance in InsurancesList)
             {
-                string line;
-                while((line = reader.ReadLine()) is not null)
+                if (insurance.InsuranceNumber.ToCharArray()[0] == 'O')
                 {
-                    string[] buffer = line.Split(';');
-                    if (buffer[7].ToString()[0] == 'O')
-                    {
-                        MotorInsurance TempInsurance = new MotorInsurance(Int32.Parse(buffer[0].ToString()), buffer[1].ToString(), buffer[2].ToString(), buffer[3].ToString(), double.Parse(buffer[4].ToString()), DateTime.Parse(buffer[5].ToString()), DateTime.Parse(buffer[6].ToString()), buffer[7].ToString(), buffer[8].ToString() == "true" ? true : false);
-                        TempInsurance.Customer = Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[26].ToString()));
-                        Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[26].ToString())).Insurances.Add(TempInsurance);
-                        TempInsurance.VehicleId = Int32.Parse(buffer[9].ToString());
-                        Vehicle.Vehicles.First(e => e.VehicleId == Int32.Parse(buffer[9].ToString())).MotorInsurances.Add(TempInsurance);
-                        Insurance.Insurances.Add(TempInsurance);
-                        TempInsurance.Vehicle = Vehicle.Vehicles.First(e => e.VehicleId == Int32.Parse(buffer[9].ToString()));
-                    }
-                    else if (buffer[7].ToString()[0] == 'H')
-                    {
-                        HouseInsurance houseInsurance = new HouseInsurance(Int32.Parse(buffer[0].ToString()), buffer[1].ToString(), buffer[2].ToString(), buffer[3].ToString(), double.Parse(buffer[4].ToString()), DateTime.Parse(buffer[5].ToString()), DateTime.Parse(buffer[6].ToString()), buffer[7].ToString(), new Common.Adress(buffer[21].ToString(), buffer[22].ToString(), buffer[23].ToString(), buffer[24].ToString(), buffer[25].ToString()));
-                        houseInsurance.Customer = Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[26].ToString()));
-                        Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[26].ToString())).Insurances.Add(houseInsurance);
-                        Insurance.Insurances.Add(houseInsurance);
-                    } else if (buffer[7].ToString()[0] == 'L')
-                    {
-                        bool[] Answers = new bool[10];
-                        int initialValue = 10;
-                        for(int j = 0; j < Answers.Length; j++)
-                        {
-                            Answers[j] = buffer[initialValue].ToString() == "true" ? true : false;
-                        }
-
-                        LifeInsurance LifeInsurance = new LifeInsurance(Int32.Parse(buffer[0].ToString()), buffer[1].ToString(), buffer[2].ToString(), buffer[3].ToString(), double.Parse(buffer[4].ToString()), DateTime.Parse(buffer[5].ToString()), DateTime.Parse(buffer[6].ToString()), buffer[7].ToString(), Int32.Parse(buffer[10].ToString()), new Survey(Answers));
-                        LifeInsurance.Customer = Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[26].ToString()));
-                        Customer.Customers.First(e => e.CustomerId == Int32.Parse(buffer[26].ToString())).Insurances.Add(LifeInsurance);
-                        Insurance.Insurances.Add(LifeInsurance);
-                    }
+                    MotorInsurance MotorInsurance = new MotorInsurance(insurance.CustomerId, insurance.Name, insurance.Surname, insurance.Pesel, Double.Parse(insurance.Price.ToString()), insurance.SignDate, insurance.EndDate, insurance.InsuranceNumber, insurance.AutoCasco);
+                    MotorInsurance.Customer = Customer.Customers.First(e => e.CustomerId == insurance.CustomerId);
+                    Customer.Customers.First(e => e.CustomerId == insurance.CustomerId).Insurances.Add(MotorInsurance);
+                    MotorInsurance.VehicleId = insurance.VehicleId;
+                    Vehicle.Vehicles.First(e => e.VehicleId == insurance.VehicleId).MotorInsurances.Add(MotorInsurance);
+                    Insurance.Insurances.Add(MotorInsurance);
+                    MotorInsurance.Vehicle = Vehicle.Vehicles.First(e => e.VehicleId == insurance.VehicleId);
                 }
-                reader.Close();
+                else
+                if (insurance.InsuranceNumber.ToCharArray()[0] == 'H')
+                {
+                    HouseInsurance houseInsurance = new HouseInsurance(insurance.InsuranceId, insurance.Name, insurance.Surname, insurance.Pesel, Double.Parse(insurance.Price.ToString()), insurance.SignDate, insurance.EndDate, insurance.InsuranceNumber, new Common.Adress(insurance.City, insurance.PostalCode, insurance.Street, insurance.HouseNumber, insurance.FlatNumber));
+                    houseInsurance.Customer = Customer.Customers.First(e => e.CustomerId == insurance.CustomerId);
+                    Customer.Customers.First(e => e.CustomerId == insurance.CustomerId).Insurances.Add(houseInsurance);
+                    Insurance.Insurances.Add(houseInsurance);
+                } else
+                if (insurance.InsuranceNumber.ToCharArray()[0] == 'L')
+                {
+                    bool[] Answers = new bool[10];
+                    Answers[0] = insurance.Survey1;
+                    Answers[1] = insurance.Survey2;
+                    Answers[2] = insurance.Survey3;
+                    Answers[3] = insurance.Survey4;
+                    Answers[4] = insurance.Survey5;
+                    Answers[5] = insurance.Survey6;
+                    Answers[6] = insurance.Survey7;
+                    Answers[7] = insurance.Survey8;
+                    Answers[8] = insurance.Survey9;
+                    Answers[9] = insurance.Survey10;
+                    LifeInsurance lifeInsurance = new LifeInsurance(insurance.InsuranceId, insurance.Name, insurance.Surname, insurance.Pesel, Double.Parse(insurance.Price.ToString()), insurance.SignDate, insurance.EndDate, insurance.InsuranceNumber, insurance.CustomerAge, new Survey(Answers));
+                    lifeInsurance.Customer = Customer.Customers.First(e => e.CustomerId == insurance.CustomerId);
+                    Customer.Customers.First(e => e.CustomerId == insurance.CustomerId).Insurances.Add(lifeInsurance);
+                    Insurance.Insurances.Add(lifeInsurance);
+                }
             }
         }
+
+        
     }
 }

@@ -1,13 +1,17 @@
-#wrapper[b-gi90vsa0ba] {
-    width: 500px;
-    border: 1px solid black;
+#wrapper[b-9bv51t0sfr] {
+    width: 100%;
+    overflow: hidden;
 }
 
-#first[b-gi90vsa0ba] {
-    width: 300px;
-    border: 1px solid red;
+#first[b-9bv51t0sfr] {
+    width: auto;
+    float: left;
+    border-radius: 25px;
+    height: 50%;
 }
 
-#second[b-gi90vsa0ba] {
-    border: 1px solid green;
+#second[b-9bv51t0sfr] {
+    overflow: hidden;
+    border-radius: 25px;
+    height: 50%;
 }

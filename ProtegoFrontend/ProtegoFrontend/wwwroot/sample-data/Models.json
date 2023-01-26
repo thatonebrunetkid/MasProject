@@ -1,0 +1,101 @@
+﻿[
+  {
+    "modelId": 1,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 3,
+    "equipment": "ESSENTIA",
+    "engineCode": "Z14XEL",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 2,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 3,
+    "equipment": "ENJOY",
+    "engineCode": "Z14XEP",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 3,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 3,
+    "equipment": "EDITION",
+    "engineCode": "Z16XEP",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 4,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 4,
+    "equipment": "EDITION PLUS",
+    "engineCode": "Z16XEP",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 5,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 4,
+    "equipment": "ELEGANCE",
+    "engineCode": "Z16XER",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 6,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 4,
+    "equipment": "SPORT",
+    "engineCode": "Z18XE",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 7,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 5,
+    "equipment": "COSMO",
+    "engineCode": "Z18XER",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 8,
+    "name": "Astra",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 5,
+    "equipment": "OPC",
+    "engineCode": "Z20NET",
+    "brandId": 1
+  },
+
+  {
+    "modelId": 9,
+    "name": "E90",
+    "productionStartDate": "2004-01-01T00:00:00.000",
+    "productionEndDate": "2010-01-01T00:00:00.000",
+    "generation": 5,
+    "equipment": "INDIVIDUAL",
+    "engineCode": "N25E",
+    "brandId": 2
+  }
+
+]

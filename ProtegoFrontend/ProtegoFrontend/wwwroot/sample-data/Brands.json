@@ -1,0 +1,26 @@
+﻿[
+  {
+    "brandId": 1,
+    "name": "Opel"
+  },
+  {
+    "brandId": 2,
+    "name": "BMW"
+  },
+  {
+    "brandId": 3,
+    "name": "Ford"
+  },
+  {
+    "brandId": 4,
+    "name": "Scania"
+  },
+  {
+    "brandId": 5,
+    "name": "Man"
+  },
+  {
+    "brandId": 6,
+    "name": "Ducati"
+  }
+]

@@ -1,103 +1,131 @@
 ﻿@page "/Dashboard/{CustomerId:int}"
 @using MasProjekt.Backoffice.Models.Customers
+@using MasProjekt.Backoffice.Models.Insurance
+@using System.Text
 
 <style>
-    body{
+    body {
         background-color: rgb(239, 239, 239);
     }
 </style>
 
-<div id="wrapper">
-    <div id="first">
-        <h1 style="font-family: Arial">Customer information</h1>
-        <div id style="background-color: white; border-radius: 25px; box-shadow: 10px 10px 5px lightblue">
-            @if (customer.GetCustomerData().Contains("NIP: "))
-            {
-                <table>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px; float: left">Company Name: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.CompanyName</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px; float: left">NIP: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.NIP</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px; float: left">Adress: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Adress.ToString()</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px; float: left">Email: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Email</td>
-                    </tr>
-                </table>
-            }
-            @if (customer.GetCustomerData().Contains("Pesel: "))
-            {
-                <table>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px; float: left">  Name: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@retailCustomer.Name</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px">  Surname: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Surname</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px">  PESEL: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Pesel</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px">  Number: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.ContactNumber</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px">  Email: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Email</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Arial; font-size: 24px">  Adress: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Adress.ToString()</td>
-                    </tr>
-                </table>
-            }
 
-        </div>
+<div id="wrapper">
+    <div>
+        <h1 style="font-family: Arial">Customer information</h1>
     </div>
-    <div id="second">
-        <div id style="background-color: white; border-radius: 25px; box-shadow: 10px 10px 5px lightblue">
-            <table>
+    <div id="first" style="background-color: white; margin: 20px">
+        @if (customer.GetCustomerData().Contains("NIP: "))
+        {
+            <table style="margin: 20px">
                 <tr>
-                    <td style="font-family: Arial; font-size: 24px; float: left">This customer bought: </td>
-                    <td style="font-family: Arial; font-size: 24px; float: left">@GetBoughtProductsNumber() products</td>
+                    <td style="font-family: Arial; font-size: 24px; float: left">Company Name: </td>
+                    <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.CompanyName</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px; float: left">NIP: </td>
+                    <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.NIP</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px; float: left">Adress: </td>
+                    <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Adress.ToString()</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px; float: left">Email: </td>
+                    <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Email</td>
                 </tr>
             </table>
-        </div>
+        }
+        @if (customer.GetCustomerData().Contains("Pesel: "))
+        {
+            <table style="margin: 20px">
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px; float: left">  Name: </td>
+                    <td style="font-family: Arial; font-size: 24px;">@retailCustomer.Name</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px">  Surname: </td>
+                    <td style="font-family: Arial; font-size: 24px">@retailCustomer.Surname</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px">  PESEL: </td>
+                    <td style="font-family: Arial; font-size: 24px">@retailCustomer.Pesel</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px">  Number: </td>
+                    <td style="font-family: Arial; font-size: 24px">@retailCustomer.ContactNumber</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px">  Email: </td>
+                    <td style="font-family: Arial; font-size: 24px">@retailCustomer.Email</td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial; font-size: 24px">  Adress: </td>
+                    <td style="font-family: Arial; font-size: 24px">@retailCustomer.Adress.ToString()</td>
+                </tr>
+            </table>
+        }
+
+    </div>
+    <div id="second" style="background-color: white; margin: 20px">
+        <table style="margin: 0 auto; vertical-align: center">
+            <tr style="text-align: center">
+                <td style="font-family: Arial; font-size: 24px; float: left">This customer bought: </td>
+                <td style="font-family: Arial; font-size: 24px; float: left; margin: auto">@GetBoughtProductsNumber() products</td>
+            </tr>
+        </table>
+    </div>
+    <div id="second" style="margin: 0 auto; border-radius: 25px; background-color: white">
+        @if (GetBoughtProductsNumber() == 3)
+        {
+            <h2 style="font-family: Arial; font-size: 24px; text-align: center">This Customer is fully protected</h2>
+            <center><img style="width: 25%" src="Assets/complete.gif" /></center>
+        }
+        @if (GetBoughtProductsNumber() < 3)
+        {
+            <h2 style="font-family: Arial; font-size: 24px; text-align: center">Contact with customer to make an offer</h2>
+            <center><img style="width: 25%" src="Assets/uncomplete.gif" /></center>
+        }
+    </div>
+</div>
+<div>
+    <h1 style="font-family: Arial">Products information</h1>
+</div>
+<div id="wrapper">
+    <div id="first" style="background-color: white; margin: 20px">
+        @foreach(var insuranceProduct in customer.Insurances)
+        {
+            <table style="margin: 0 auto; vertical-align: central">
+                <tr style="text-align: center">
+                    <a>@insuranceProduct.GetInsuranceData()</a>
+                </tr>
+            </table>
+        }
     </div>
 </div>
 
 
 
-    @code {
-        [Parameter]
-        public int CustomerId { get; set; }
-        private Customer customer;
-        private RetailCustomer retailCustomer;
-        private CorpoCustomer corpoCustomer;
+@code {
+    [Parameter]
+    public int CustomerId { get; set; }
+    private Customer customer;
+    private RetailCustomer retailCustomer;
+    private CorpoCustomer corpoCustomer;
 
 
-        protected override void OnInitialized()
-        {
-            customer = Customer.Customers.First(e => e.CustomerId == CustomerId);
-            if(customer.GetCustomerData().Contains("Pesel: "))
-                retailCustomer = (RetailCustomer)customer;
-            else
-                corpoCustomer = (CorpoCustomer)customer;
-        }
+    protected override void OnInitialized()
+    {
+        customer = Customer.Customers.First(e => e.CustomerId == CustomerId);
+        if (customer.GetCustomerData().Contains("Pesel: "))
+            retailCustomer = (RetailCustomer)customer;
+        else
+            corpoCustomer = (CorpoCustomer)customer;
+    }
 
-        private int GetBoughtProductsNumber()
-        {
-            return customer.Insurances.Count();
-        }
+    private int GetBoughtProductsNumber()
+    {
+        return customer.Insurances.Count();
+    }
 
 }

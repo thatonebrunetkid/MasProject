@@ -1,4 +1,4 @@
-﻿namespace ProtegoFrontend.wwwroot.sample_data
+﻿namespace ProtegoFrontend.Connection
 {
     public class CustomersModel
     {
@@ -15,5 +15,6 @@
         public string FlatNumber { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }
+
     }
 }

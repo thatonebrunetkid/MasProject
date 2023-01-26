@@ -1,0 +1,70 @@
+﻿[
+  {
+    "vehicleId": 1,
+    "productionDate": "2022-08-01T00:00:00.000",
+    "licensePlateNumber": "WND3456",
+    "frameNumber": "AEC654123",
+    "vin": "",
+    "importCountry": "",
+    "firstRegistrationDate": "0001-01-01T00:00:00.000",
+    "mileageCount": 0,
+    "isHook": false,
+    "isLpg": false,
+    "maximumAllowableAxleLoad": 0,
+    "customerId": 1,
+    "brandId": 1,
+    "modelId": 1
+  },
+
+  {
+    "vehicleId": 2,
+    "productionDate": "2005-06-12T00:00:00.000",
+    "licensePlateNumber": "WB654321",
+    "frameNumber": "",
+    "vin": "OPAHLYUT6765421",
+    "importCountry": "Poland",
+    "firstRegistrationDate": "2005-08-11T00:00:00.000",
+    "mileageCount": 208000,
+    "isHook": false,
+    "isLpg": true,
+    "maximumAllowableAxleLoad": 0,
+    "customerId": 1,
+    "brandId": 2,
+    "modelId": 2
+  },
+
+  {
+    "vehicleId": 3,
+    "productionDate": "2012-01-01T00:00:00.000",
+    "licensePlateNumber": "WR12345",
+    "frameNumber": "",
+    "vin": "SC6754ART432",
+    "importCountry": "USA",
+    "firstRegistrationDate": "2013-01-01T00:00:00.000",
+    "mileageCount": 450000,
+    "isHook": false,
+    "isLpg": false,
+    "maximumAllowableAxleLoad": 12000,
+    "customerId": 2,
+    "brandId": 3,
+    "modelId": 3
+  },
+
+  {
+    "vehicleId": 4,
+    "productionDate": "2022-09-01T00:00:00.000",
+    "licensePlateNumber": "WB5432",
+    "frameNumber": "",
+    "vin": "efnuefuofh",
+    "importCountry": "Germany",
+    "firstRegistrationDate": "2022-09-01T00:00:00.000",
+    "mileageCount": 120000,
+    "isHook": false,
+    "isLpg": false,
+    "maximumAllowableAxleLoad": 0,
+    "customerId": 1,
+    "brandId": 1,
+    "modelId": 8
+  }
+]
+

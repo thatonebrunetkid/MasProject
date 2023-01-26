@@ -8,6 +8,7 @@
   "resources": {
     "assembly": {
       "Blazored.Typeahead.dll": "sha256-YNakk\/GmzitY7JWE\/2LWemYjE+ufhSnWzOQM36VuU5Q=",
+      "ChartJs.Blazor.dll": "sha256-0ciRJps8EWsbo3zIh4fYA2+QBnZIl1lSu4aydLaQDEo=",
       "System.Web.Mvc.dll": "sha256-1Acu8DaTplRKSDgIOiyrKut5l9WTN4rcXaPOUpE+j2I=",
       "System.Web.Razor.dll": "sha256-CmYDCv2gx5PuepVdz5qJvZRiW5B+K54GPvEZKhT6GWQ=",
       "System.Web.Helpers.dll": "sha256-kOHXGxwtFhM5XfDCJuFZoworjYeVroLXLuw+E4EBvdw=",
@@ -57,7 +58,7 @@
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-wm\/PyT01CAndytn\/B\/egrjENN3gkDMsMDaFon1TwCHA=",
       "Microsoft.Net.Http.Headers.dll": "sha256-P66ftDrXwc6ayND8uYzIk0CPQy1GjNZAPHx9RMhi3V4=",
       "Microsoft.Web.Infrastructure.dll": "sha256-\/hj0JZyUfB\/W108YJzcOctetCa77S3IK8iczNYPgFp8=",
-      "Newtonsoft.Json.dll": "sha256-XZbuUbKv9ZIDnuvC7SA9n1X935wIgvs00\/DgeDdJVKU=",
+      "Newtonsoft.Json.dll": "sha256-mRd6TL4DYldo1ko9czkjEDcoiPdMPrJxz3dekwV6OOY=",
       "System.IO.Pipelines.dll": "sha256-\/C5xhI+m3Aqrcjxy\/TauLyqv\/\/5l8WEW3rXFtVlNhy8=",
       "Microsoft.CSharp.dll": "sha256-PpkoBrb5GDDzBCVjEGJ15VkONpHLxk8ZZ3uc0eDYPaY=",
       "Microsoft.VisualBasic.Core.dll": "sha256-SyyaBBG5sBtJEfy89ATtHrxESu8\/SyNLYJXV1OaHYG0=",
@@ -224,13 +225,13 @@
       "mscorlib.dll": "sha256-zMI\/dXK7DoZZ9Qm9U9\/jRN4iQ9Ss3w8\/rwQQxC6SW9Y=",
       "netstandard.dll": "sha256-W3q3PN+lpRB+tRJEIhtMgYOGFv0pauEeeCS9iIRkKAM=",
       "System.Private.CoreLib.dll": "sha256-9rUJv1mXEQdGt\/kWiJ1ITPPzp3cAi3lSmqHVTisp7w0=",
-      "ProtegoFrontend.dll": "sha256-hfQ+ctkzg9K9VhzhRzqo+PZ76gIo9t+PNlJhJhvW2FM="
+      "ProtegoFrontend.dll": "sha256-8dDnFR1xbIgMAoiMespjsqfq8OLoyH9+gib1ydNKIKE="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "ProtegoFrontend.pdb": "sha256-7cVCSigkLESUTtGkf3JeM3zauGrLEEQLdii+EJqG2PU="
+      "ProtegoFrontend.pdb": "sha256-dTttnGh\/s9XOb7rUpk8mAbUOFP5dTJpbBUqPVZSZ7Z4="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-8oJip361m8OrfLRJOuIeswWKaoxtT27\/wINCxhn+s4c=",
@@ -241,6 +242,7 @@
       "icudt_no_CJK.dat": "sha256-oM7Z6aN9jHmCYqDMCBwFgFAYAGgsH1jLC\/Z6DYeVmmk=",
       "dotnet.5.0.17.js": "sha256-bN7gtVqP2mIpLB0ilKP5kcTBnBDitG1uYoLSnd\/WeBY="
     },
+    "runtimeAssets": null,
     "satelliteResources": null
   }
 }
