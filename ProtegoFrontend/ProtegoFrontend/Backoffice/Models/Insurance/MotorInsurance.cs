@@ -19,7 +19,7 @@ namespace MasProjekt.Backoffice.Models.Insurance
 
         public override string ToString()
         {
-            return $"Name: {Name} Surname: {Surname} PESEL: {PESEL} Price: {Price} SignDate: {SignDate} EndDate: {EndDate} Insurance Number: {InsuranceNumber} Auto Casco: {(AutoCasco == true ? "Yes" : "No")}";
+            return $"{Name}|{Surname}|{PESEL}|{Price}|{SignDate}|{EndDate}|{InsuranceNumber}|{(AutoCasco == true ? "Yes" : "No")}";
         }
 
         public string PrepareToSave()

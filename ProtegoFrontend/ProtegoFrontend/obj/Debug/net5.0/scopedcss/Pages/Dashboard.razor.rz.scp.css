@@ -1,17 +1,35 @@
-#wrapper[b-9bv51t0sfr] {
+#wrapper[b-gi90vsa0ba] {
     width: 100%;
     overflow: hidden;
 }
 
-#first[b-9bv51t0sfr] {
+#first[b-gi90vsa0ba] {
     width: auto;
     float: left;
     border-radius: 25px;
     height: 50%;
 }
 
-#second[b-9bv51t0sfr] {
+#second[b-gi90vsa0ba] {
     overflow: hidden;
     border-radius: 25px;
     height: 50%;
+}
+
+.listedButton[b-gi90vsa0ba] {
+    background-color: white;
+    border: 1px solid #1DA1F2;
+    border-radius: 15px;
+    font-family: Arial;
+    font-size: 24px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.listedButton:hover[b-gi90vsa0ba]{
+    background-color: deepskyblue;
+}
+
+.listedButton:focus[b-gi90vsa0ba]{
+    background-color: deepskyblue;
 }

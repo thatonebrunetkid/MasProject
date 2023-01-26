@@ -15,3 +15,21 @@
     border-radius: 25px;
     height: 50%;
 }
+
+.listedButton {
+    background-color: white;
+    border: 1px solid #1DA1F2;
+    border-radius: 15px;
+    font-family: Arial;
+    font-size: 24px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.listedButton:hover{
+    background-color: deepskyblue;
+}
+
+.listedButton:focus{
+    background-color: deepskyblue;
+}

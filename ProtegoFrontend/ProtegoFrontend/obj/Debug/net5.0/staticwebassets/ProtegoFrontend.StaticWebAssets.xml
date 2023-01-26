@@ -1,6 +1,6 @@
 ﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="_content/Blazored.Typeahead" Path="/Users/mateuszaugustyniak/.nuget/packages/blazored.typeahead/4.6.0/build/../staticwebassets/" />
-  <ContentRoot BasePath="_content/ChartJs.Blazor.Fork" Path="/Users/mateuszaugustyniak/.nuget/packages/chartjs.blazor.fork/2.0.2/build/../staticwebassets/" />
-  <ContentRoot BasePath="/" Path="/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/bin/Debug/net5.0/wwwroot/" />
-  <ContentRoot BasePath="/" Path="/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/obj/Debug/net5.0/scopedcss/bundle/" />
+  <ContentRoot BasePath="/" Path="D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/Blazored.Typeahead" Path="C:\Users\mateu\.nuget\packages\blazored.typeahead\4.6.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/ChartJs.Blazor.Fork" Path="C:\Users\mateu\.nuget\packages\chartjs.blazor.fork\2.0.2\build\..\staticwebassets\" />
 </StaticWebAssets>

@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/ProtegoFrontend.csproj": {}
+    "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoFrontend\\ProtegoFrontend.csproj": {}
   },
   "projects": {
-    "/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/ProtegoFrontend.csproj": {
+    "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoFrontend\\ProtegoFrontend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/ProtegoFrontend.csproj",
+        "projectUniqueName": "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoFrontend\\ProtegoFrontend.csproj",
         "projectName": "ProtegoFrontend",
-        "projectPath": "/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/ProtegoFrontend.csproj",
-        "packagesPath": "/Users/mateuszaugustyniak/.nuget/packages/",
-        "outputPath": "/Users/mateuszaugustyniak/Documents/MasProject/ProtegoFrontend/ProtegoFrontend/obj/",
+        "projectPath": "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoFrontend\\ProtegoFrontend.csproj",
+        "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoFrontend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/mateuszaugustyniak/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -81,14 +88,6 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
               "name": "Microsoft.NETCore.App.Runtime.browser-wasm",
               "version": "[5.0.17, 5.0.17]"
             }
@@ -98,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22301.10\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

@@ -225,13 +225,13 @@
       "mscorlib.dll": "sha256-zMI\/dXK7DoZZ9Qm9U9\/jRN4iQ9Ss3w8\/rwQQxC6SW9Y=",
       "netstandard.dll": "sha256-W3q3PN+lpRB+tRJEIhtMgYOGFv0pauEeeCS9iIRkKAM=",
       "System.Private.CoreLib.dll": "sha256-9rUJv1mXEQdGt\/kWiJ1ITPPzp3cAi3lSmqHVTisp7w0=",
-      "ProtegoFrontend.dll": "sha256-8dDnFR1xbIgMAoiMespjsqfq8OLoyH9+gib1ydNKIKE="
+      "ProtegoFrontend.dll": "sha256-A\/yxQ8xCZhLi0qwAEAGM40Q2cZtWgwZ3BLUk9\/CVWHA="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "ProtegoFrontend.pdb": "sha256-dTttnGh\/s9XOb7rUpk8mAbUOFP5dTJpbBUqPVZSZ7Z4="
+      "ProtegoFrontend.pdb": "sha256-VZyc0oU\/ClPLvMdVitcCabdCi8vBTqY7ZiZbKlyVnnw="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-8oJip361m8OrfLRJOuIeswWKaoxtT27\/wINCxhn+s4c=",
@@ -242,7 +242,6 @@
       "icudt_no_CJK.dat": "sha256-oM7Z6aN9jHmCYqDMCBwFgFAYAGgsH1jLC\/Z6DYeVmmk=",
       "dotnet.5.0.17.js": "sha256-bN7gtVqP2mIpLB0ilKP5kcTBnBDitG1uYoLSnd\/WeBY="
     },
-    "runtimeAssets": null,
     "satelliteResources": null
   }
 }

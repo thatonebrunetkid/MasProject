@@ -18,7 +18,7 @@ namespace MasProjekt.Backoffice.Models.Insurance
 
         public override string ToString()
         {
-            return $"Name: {Name} Surname: {Surname} PESEL: {PESEL} Price: {Price} Sign Date: {SignDate} End Date: {EndDate} Insurance Number: {InsuranceNumber} Adres: {Adress.ToString()}";
+            return $"{Name}|{Surname}|{PESEL}|{Price}|{SignDate}|{EndDate}|{InsuranceNumber}|{Adress.ToString()}";
         }
 
         public string PrepareToSave()

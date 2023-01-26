@@ -38,6 +38,19 @@ namespace MasProjekt.Backoffice.Models.Insurance
             return this.ToString();
         }
 
+        public string GetInsuranceBasicInformation()
+        {
+            string insuranceType;
+            if (InsuranceNumber.ToCharArray()[0] == 'O')
+                insuranceType = "Car Policy";
+            else if (InsuranceNumber.ToCharArray()[0] == 'H')
+                insuranceType = "House insurance";
+            else
+                insuranceType = "Life insurance";
+
+            return $"{insuranceType} | {this.InsuranceNumber} | {this.SignDate}";
+        }
+
         public void AddNewInsurance(Insurance insurance)
         {
             Insurances.Add(insurance);

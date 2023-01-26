@@ -93,14 +93,140 @@
 </div>
 <div id="wrapper">
     <div id="first" style="background-color: white; margin: 20px">
-        @foreach(var insuranceProduct in customer.Insurances)
-        {
-            <table style="margin: 0 auto; vertical-align: central">
-                <tr style="text-align: center">
-                    <a>@insuranceProduct.GetInsuranceData()</a>
-                </tr>
+       <div style="margin: 20px">
+           @if(customer.Insurances.Count() > 0)
+            {
+                @foreach (var insuranceProduct in customer.Insurances)
+                {
+                    <table style="margin: 0 auto; vertical-align: central">
+                        <tr style="text-align: center">
+                            <button class="listedButton" @onclick="@(_=>SetNumber(insuranceProduct.GetInsuranceBasicInformation()))">@insuranceProduct.GetInsuranceBasicInformation()</button>
+                        </tr>
+                    </table>
+                }
+            }else
+            {
+                <center><img style="width: 25%" src="Assets/nothingHere.gif" /></center>
+                <h2 style="font-family: Arial; font-size: 24px; text-align: center">Nothing is here</h2>
+            }
+        </div>
+    </div>
+    <div id="second" style="background-color: white; margin: 20px">
+        <div style="margin: 20px">
+           <table style="margin: 0 auto; vertical-align: central">
+               @if(DetailedInsuranceDetails != "")
+                {
+                    var details = GetInsuranceDetails();
+                    var splitted = details.Split('|');
+                    @if (splitted[6].ToCharArray()[0] == 'O')
+                    {
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[0]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Surname: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[1]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">PESEL: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[2]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Price: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[3]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Sign Date: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[4]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">End Date: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[5]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Auto Casco: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
+                        </tr>
+                        //details pojazdu
+                    }else if(splitted[6].ToCharArray()[0] == 'H')
+                    {
+                         <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[0]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Surname: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[1]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">PESEL: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[2]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Price: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[3]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Sign Date: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[4]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">End Date: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[5]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
+                        </tr>
+                        //details adresu
+                    }else
+                    {
+                         <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[0]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Surname: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[1]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">PESEL: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[2]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Price: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[3]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Sign Date: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[4]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">End Date: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[5]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Customer Age: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
+                        </tr>
+                        //survey details
+                    }
+                } else
+                {
+                    <center><img style="width: 25%" src="Assets/select.gif" /></center>
+                    <h2 style="font-family: Arial; font-size: 24px; text-align: center">Select product from left list</h2>
+                }
             </table>
-        }
+        </div>
     </div>
 </div>
 
@@ -112,6 +238,7 @@
     private Customer customer;
     private RetailCustomer retailCustomer;
     private CorpoCustomer corpoCustomer;
+    private string DetailedInsuranceDetails = "";
 
 
     protected override void OnInitialized()
@@ -128,4 +255,20 @@
         return customer.Insurances.Count();
     }
 
+    void SetNumber(string value)
+    {
+        DetailedInsuranceDetails = value;
+    }
+
+    private string GetInsuranceDetails()
+    {
+        if (DetailedInsuranceDetails != "")
+        {
+            string[] split = DetailedInsuranceDetails.Split(" | ");
+            string insuranceNumeber = split[1];
+            return customer.Insurances.First(e => e.InsuranceNumber == insuranceNumeber).GetInsuranceData();
+        }
+        else
+            return "";
+    }
 }

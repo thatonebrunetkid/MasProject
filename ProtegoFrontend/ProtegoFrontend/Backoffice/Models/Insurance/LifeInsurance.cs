@@ -19,7 +19,7 @@ namespace MasProjekt.Backoffice.Models.Insurance
 
         public override string ToString()
         {
-            return $"Name: {Name} Surname: {Surname} PESEL: {PESEL} Price: {Price} Sign Date: {SignDate} End Date: {EndDate} Insurance Number: {InsuranceNumber} Customer Age: {CustomerAge} Survey Answers: {Survey.GetSurveyData()}";
+            return $"{Name}|{Surname}|{PESEL}|{Price}|{SignDate}|{EndDate}|{InsuranceNumber}|{CustomerAge}|{Survey.GetSurveyData()}";
         }
 
         public string PrepareToSave()
