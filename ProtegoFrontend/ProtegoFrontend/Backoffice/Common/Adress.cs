@@ -25,7 +25,7 @@ namespace MasProjekt.Backoffice.Common
 
         public override string ToString()
         {
-            return $"City: {City} PostalCode: {PostalCode} Street: {Street} House Number: {HouseNumber} FlatNumber: {FlatNumber}";
+            return $"{City}|{PostalCode}|{Street}|{HouseNumber}|{FlatNumber}";
         }
 
         public string PrepareAdress()

@@ -119,7 +119,7 @@ using System.Text;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 235 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
+#line 388 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
        
     [Parameter]
     public int CustomerId { get; set; }

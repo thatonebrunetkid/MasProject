@@ -20,7 +20,7 @@ namespace MasProjekt.Backoffice.Models.Insurance
             StringBuilder StringBuilder = new StringBuilder();
 
             foreach (var element in Answers)
-                StringBuilder.Append(element == true ? "|Yes " : "|No ");
+                StringBuilder.Append(element == true ? "Yes|" : "No|");
             return StringBuilder.ToString();
         }
 

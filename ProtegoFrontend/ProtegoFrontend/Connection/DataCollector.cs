@@ -71,7 +71,7 @@ namespace MasProjekt.Backoffice.Connection
                 Customer TempCustomer = Customer.Customers.First(e => e.CustomerId == VehicleTemp.CustomerId);
                 if (VehicleTemp.FrameNumber != "")
                 {
-                    Motorbike Motorbike = new Motorbike(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlatesNumber, VehicleTemp.FrameNumber);
+                    Motorbike Motorbike = new Motorbike(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlateNumber, VehicleTemp.FrameNumber);
                     Vehicle.Vehicles.Add(Motorbike);
                     TempCustomer.Vehicles.Add(Motorbike);
                     Motorbike.Customer = TempCustomer;
@@ -79,19 +79,9 @@ namespace MasProjekt.Backoffice.Connection
                     Motorbike.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
                     Motorbike.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
                 }
-                else if (VehicleTemp.MaximumAllowableAxleLoad != 0)
+                else if(VehicleTemp.MaximumAllowableAxleLoad != 0)
                 {
-                    PersonalCar TempCar = new PersonalCar(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlatesNumber, VehicleTemp.Vin, VehicleTemp.ImportCountry, VehicleTemp.FirstRegistrationDate, VehicleTemp.MileageCount, VehicleTemp.IsHook, VehicleTemp.IsLpg);
-                    Vehicle.Vehicles.Add(TempCar);
-                    TempCustomer.Vehicles.Add(TempCar);
-                    TempCar.Customer = TempCustomer;
-                    TempCar.CustomerId = TempCustomer.CustomerId;
-                    TempCar.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
-                    TempCar.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
-                }
-                else
-                {
-                    Truck TempTruck = new Truck(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlatesNumber, VehicleTemp.Vin, VehicleTemp.ImportCountry, VehicleTemp.FirstRegistrationDate, VehicleTemp.MileageCount, VehicleTemp.MaximumAllowableAxleLoad);
+                    Truck TempTruck = new Truck(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlateNumber, VehicleTemp.Vin, VehicleTemp.ImportCountry, VehicleTemp.FirstRegistrationDate, VehicleTemp.MileageCount, VehicleTemp.MaximumAllowableAxleLoad);
                     Vehicle.Vehicles.Add(TempTruck);
                     TempCustomer.Vehicles.Add(TempTruck);
                     TempTruck.Customer = TempCustomer;
@@ -99,6 +89,17 @@ namespace MasProjekt.Backoffice.Connection
                     TempTruck.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
                     TempTruck.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
                 }
+                else
+                {
+                    PersonalCar TempCar = new PersonalCar(VehicleTemp.VehicleId, VehicleTemp.ProductionDate, VehicleTemp.LicensePlateNumber, VehicleTemp.Vin, VehicleTemp.ImportCountry, VehicleTemp.FirstRegistrationDate, VehicleTemp.MileageCount, VehicleTemp.IsHook, VehicleTemp.IsLpg);
+                    Vehicle.Vehicles.Add(TempCar);
+                    TempCustomer.Vehicles.Add(TempCar);
+                    TempCar.Customer = TempCustomer;
+                    TempCar.CustomerId = TempCustomer.CustomerId;
+                    TempCar.Brand = Brand.Brands.First(e => e.BrandId == VehicleTemp.BrandId);
+                    TempCar.Model = Model.Models.First(e => e.ModelId == VehicleTemp.ModelId);
+                }
+               
             }
         }
 

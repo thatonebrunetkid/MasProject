@@ -5,7 +5,7 @@ namespace ProtegoFrontend.Connection
 	{
 		public int VehicleId { get; set; }
 		public DateTime ProductionDate { get; set; }
-		public string LicensePlatesNumber { get; set; }
+		public string LicensePlateNumber { get; set; }
 		public string? FrameNumber { get; set; }
 		public string? Vin { get; set; }
 		public string? ImportCountry { get; set; }

@@ -24,7 +24,7 @@ namespace MasProjekt.Backoffice.Models.Vehicle
 
         public override string ToString()
         {
-            return $"Production Date: {ProductionDate} License Plates Number: {LicencePlatesNumber} VIN: {VIN} Import Country: {ImportCountry} First Registration Date: {FirstRegistrationDate} Mileage Count: {MileageCount} Maximum Allowable Axle Load: {MaximulAllowableAxleLoad}";
+            return $"{ProductionDate} | {LicencePlatesNumber} | {VIN} | {ImportCountry} | {FirstRegistrationDate} | {MileageCount} | {MaximulAllowableAxleLoad}";
         }
 
         public string PrepareTruckToSave()

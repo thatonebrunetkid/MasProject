@@ -17,7 +17,7 @@ namespace MasProjekt.Backoffice.Models.Vehicle
 
         public override string ToString()
         {
-            return $"Production Date: {ProductionDate} LicensePlatesNumber: {LicencePlatesNumber} Frame Number: {FrameNumber}";
+            return $"{ProductionDate} | {LicencePlatesNumber} | {FrameNumber}";
         }
 
         public string PrepareMotorbikeToSave()

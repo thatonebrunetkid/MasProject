@@ -26,7 +26,7 @@ namespace MasProjekt.Backoffice.Models.Vehicle
 
         public override string ToString()
         {
-            return $"Production Date: {ProductionDate} LicensePlatesNumber: {LicencePlatesNumber} VIN: {VIN} Import Country: {ImportCountry} First Registration Date: {FirstRegistrationDate} MileageCount: {MileageCount} Is Hook: {(IsHook == true ? "Yes" : "No")} Is LPG: {(IsLPG == true ? "Yes" : "No")}";
+            return $"{ProductionDate} | {LicencePlatesNumber} | {VIN} | {ImportCountry} | {FirstRegistrationDate} | {MileageCount} | {(IsHook == true ? "Yes" : "No")} | {(IsLPG == true ? "Yes" : "No")}";
         }
 
         public string PreparePersonalCarToSave()

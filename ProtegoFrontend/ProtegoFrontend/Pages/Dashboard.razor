@@ -110,6 +110,14 @@
                 <h2 style="font-family: Arial; font-size: 24px; text-align: center">Nothing is here</h2>
             }
         </div>
+          <div style="vertical-align: central">
+               <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;">New Car Insurance</button>
+           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;">New House Insurance</button>
+           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;">New Life Insurance</button>
+
+          </div>
+
+
     </div>
     <div id="second" style="background-color: white; margin: 20px">
         <div style="margin: 20px">
@@ -152,8 +160,90 @@
                             <td style="font-family: Arial; font-size: 24px; float: left">Auto Casco: </td>
                             <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
                         </tr>
-                        //details pojazdu
-                    }else if(splitted[6].ToCharArray()[0] == 'H')
+                        <h2></h2>
+                        <h2 style="text-align: center">Car Details</h2>
+                        var carSplitted = ((MotorInsurance)(customer.Insurances.First(e => e.InsuranceNumber == splitted[6]))).Vehicle.GetVehicleData().Split(" | ");
+                        @if(carSplitted.Count() == 3)
+                        {
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Production Date: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[0]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">License Plates Number: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[1]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Frame Number: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[2]</td>
+                            </tr>
+                        }else if(carSplitted.Count() == 7)
+                        {
+                             <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Production Date: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[0]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">License Plates Number: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[1]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">VIN: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[2]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Import Country: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[3]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">First Registration Date: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[4]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Mileage Count: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[5]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Maximum Allowable Axle Load: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[6]</td>
+                            </tr>
+                        }else if(carSplitted.Count() == 8)
+                        {
+                              <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Production Date: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[0]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">License Plates Number: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[1]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">VIN: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[2]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Import Country: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[3]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">First Registration Date: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[4]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Mileage Count: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[5]</td>
+                            </tr> 
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Is Hook: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[6]</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: Arial; font-size: 24px; float: left">Is LPG: </td>
+                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[7]</td>
+                            </tr>
+                        }
+
+                }else if(splitted[6].ToCharArray()[0] == 'H')
                     {
                          <tr>
                             <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
@@ -183,7 +273,29 @@
                             <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
                             <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
                         </tr>
-                        //details adresu
+
+                        <h2 style="text-align: center">Insured House Adress</h2>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">City: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Postal Code: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[8]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Street: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[9]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">House Number: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[10]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Flat Number: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[11]</td>
+                        </tr>
+
                     }else
                     {
                          <tr>
@@ -218,7 +330,48 @@
                             <td style="font-family: Arial; font-size: 24px; float: left">Customer Age: </td>
                             <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
                         </tr>
-                        //survey details
+                        
+                        <h2>Medical Survey Details</h2>
+                         <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Pensioner: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[8]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Acciddent Victim: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[9]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Surgery: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[10]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Overweight: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[11]</td>
+                        </tr>  
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Smoker: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[12]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Alcohol Usage: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[13]</td>
+                        </tr> 
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Drugs usage: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[14]</td>
+                        </tr>
+                         <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Coronary artery disease: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[15]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Hypertension: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[16]</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: Arial; font-size: 24px; float: left">Hypertension in family: </td>
+                            <td style="font-family: Arial; font-size: 24px;">@splitted[17]</td>
+                        </tr>
                     }
                 } else
                 {
