@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "z9i4W1FoZGGnM4VPRuABx2PjLYf5iRFz+2Ldfh+gegP9SeK0+WP1N39j/58TWW5uGL7oFI5ZlXrnA7iP8gn0zw==",
+  "success": true,
+  "projectFilePath": "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\FileApi\\FileApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

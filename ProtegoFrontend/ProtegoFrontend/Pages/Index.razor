@@ -2,6 +2,7 @@
 @using MasProjekt.Backoffice.Connection
 @using MasProjekt.Backoffice.Models.Customers
 @using Blazored.Typeahead
+@using ProtegoFrontend.Backoffice.Models
 @using ProtegoFrontend.Connection
 @inject HttpClient Http
 @inject NavigationManager NavManager
@@ -16,19 +17,13 @@
     <img src="Assets/logo2.png" width="650"/>
 </div>
 <div style="text-align: center">
-    <h1 style="font-family: Arial; color:deepskyblue; text-align:center">Search customer</h1>
+    <h1 style="font-family: Arial; color:deepskyblue; text-align:center">Login</h1>
 </div>
 <div style="text-align: center">
-        <BlazoredTypeahead SearchMethod="SearchCustomer" @bind-Value="customer" placeholder="Search by phone number...">
-            <SelectedTemplate>
-                @context.ContactNumber
-            </SelectedTemplate>
-            <ResultTemplate>
-                @context.ContactNumber @context.Email
-            </ResultTemplate>
-        </BlazoredTypeahead>
+        <input type="text" id="login" placeholder="Login" @bind="Login" />
+        <input type="password" id="password" placeholder="password" @bind="Password" />
         <p></p>
-        <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" @onclick="GetCustomerAndChangePage">Select</button>
+        <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" @onclick="GetCustomerAndChangePage">Log in</button>
 </div>
 
 <div>
@@ -38,9 +33,11 @@
 </body>
 
 @code{
-    private Customer customer;
+    private string Login { get; set; } = "";
+    private string Password { get; set; } = "";
     protected async override void OnInitialized()
     {
+        DataManipulator.LoadAuthenticateData(await Http.GetFromJsonAsync<List<Authenticate>>("sample-data/Authenticate.json"));
         DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
         DataManipulator.LoadBrandsData(await Http.GetFromJsonAsync<List<BrandsModel>>("sample-data/Brands.json"));
         DataManipulator.LoadModelsData(await Http.GetFromJsonAsync<List<ModelsModel>>("sample-data/Models.json"));
@@ -55,8 +52,9 @@
 
     private void GetCustomerAndChangePage()
     {
-        if (customer != null)
-            NavManager.NavigateTo($"/Dashboard/{customer.CustomerId}");
+       if(AuthenticateModel.Users.First(e => e.Login == this.Login && e.Password == this.Password) != null)
+            NavManager.NavigateTo($"/Dashboard");
+
     }
 
 }

@@ -36,6 +36,31 @@
 .listedButton:focus[b-gi90vsa0ba]{
     background-color: deepskyblue;
 }
+/* /Pages/LifeInsurancePage.razor.rz.scp.css */
+#wrapper[b-blqq7bn4p8] {
+    width: 100%;
+    overflow: hidden;
+}
+
+#first[b-blqq7bn4p8] {
+    width: auto;
+    float: left;
+    border-radius: 25px;
+    height: 50%;
+}
+
+#second[b-blqq7bn4p8] {
+    overflow: hidden;
+    border-radius: 25px;
+    height: 50%;
+}
+
+.inputStyle[b-blqq7bn4p8] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-ifq1lep90a] {
     position: relative;

@@ -1193,8 +1193,6 @@ D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\ProtegoFrontend.MvcApplicationPartsAssemblyInfo.cache
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\ProtegoFrontend.RazorComponent.input.cache
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
-D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
-D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\Pages\FetchData.razor.g.cs
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
@@ -1207,8 +1205,6 @@ D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\ProtegoFrontend.TagHelpers.output.cache
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\ProtegoFrontend.RazorCoreGenerate.cache
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\App.razor.g.cs
-D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
-D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\Pages\FetchData.razor.g.cs
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
@@ -1453,3 +1449,11 @@ D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\refint\ProtegoFrontend.dll
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\ProtegoFrontend.pdb
 D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\ref\ProtegoFrontend.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\RazorDeclaration\Pages\LifeInsurancePage.razor.g.cs
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\Razor\Pages\LifeInsurancePage.razor.g.cs
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\scopedcss\Pages\LifeInsurancePage.razor.rz.scp.css
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\staticwebassets\ProtegoFrontend.StaticWebAssets.Pack.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\staticwebassets\msbuild.ProtegoFrontend.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\staticwebassets\msbuild.build.ProtegoFrontend.props
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.ProtegoFrontend.props
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.ProtegoFrontend.props

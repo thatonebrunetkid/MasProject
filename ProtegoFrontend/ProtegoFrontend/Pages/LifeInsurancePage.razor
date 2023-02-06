@@ -1,0 +1,257 @@
+﻿@page "/LifeInsurance/{CustomerId:int}"
+@using MasProjekt.Backoffice.Models.Customers
+@using MasProjekt.Backoffice.Models.Insurance
+@using Newtonsoft.Json;
+@using ProtegoFrontend.Connection
+@using System.Text;
+@using System.Net;
+@using System.IO;
+@inject HttpClient Http
+@inject NavigationManager NavManager
+
+
+<style>
+    body {
+        background-color: rgb(239, 239, 239);
+    }
+</style>
+
+<div style="background-color: white; border-radius: 25px; margin: 0 auto; padding: 15px">
+    <center><h2 style="font-family: Calibri; font-size: 30px">New Life Insurance</h2></center>
+</div>
+
+<div id="wrapper" style="margin: 20px; margin: 0 auto">
+    <div style="background-color: white; border-radius: 25px; margin: 15px auto; padding: 15px">
+        @if(customer.GetCustomerData().Contains("Pesel:"))
+        {
+            <center><label style="font-family: Arial; font-size: 20px">Customer Name: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Name" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Customer Surname: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Surname" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Pesel: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Pesel" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Contact Number: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.ContactNumber" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Email: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Email" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">City: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Adress.City" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Postal Code: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Adress.PostalCode" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Street: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Adress.Street" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">House Number: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Adress.HouseNumber" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Flat Number: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@RetailCustomer.Adress.FlatNumber" type="text" disabled /></center>
+        }else
+        {
+            <center><label style="font-family: Arial; font-size: 20px">Company Name: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.CompanyName" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">NIP: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.NIP" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Contact Number: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.ContactNumber" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Email: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.Email" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">City: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.Adress.City" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Postal Code: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.Adress.PostalCode" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Street: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.Adress.Street" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">House Number: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.Adress.HouseNumber" type="text" disabled /></center>
+            <center><label style="font-family: Arial; font-size: 20px">Flat Number: </label></center>
+            <center><input style="width: 50%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" value="@CorpoCustomer.Adress.FlatNumber" type="text" disabled /></center>
+        }
+        <center><label style="font-family: Arial; font-size: 20px">Does the client receive a pension?</label></center>
+        <center><input type="checkbox" @bind="question1yes" id="question1yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question1no" id="question1no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Has the client had an accident?</label></center>
+        <center><input type="checkbox" @bind="question2yes" id="question2yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question2no" id="question2no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Has the client had surgery in the last 5 years?</label></center>
+        <center><input type="checkbox" id="question3yes" @bind="question3yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question3no" id="question3no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Is the client overweight?</label></center>
+        <center><input type="checkbox" @bind="question4yes" id="question4yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question4no" id="question4no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Does the client smoke?</label></center>
+        <center><input type="checkbox" @bind="question5yes" id="question5yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question5no" id="question5no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Does the client drink alcohol?</label></center>
+        <center><input type="checkbox" @bind="question6yes" id="question6yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question6no" id="question6no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Does the client take drugs?</label></center>
+        <center><input type="checkbox" id="question7yes" @bind="question7yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" id="question7no" @bind="question7no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Does the client have coronary artery disease?</label></center>
+        <center><input type="checkbox" id="question8yes" @bind="question8yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" @bind="question8no" id="question8no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Does the client have high blood pressure?</label></center>
+        <center><input type="checkbox" id="question9yes" @bind="question9yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" id="question9no" @bind="question9no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><label style="font-family: Arial; font-size: 20px">Is there a history of hypertension in the client's family?</label></center>
+        <center><input type="checkbox" id="question10yes" @bind="question10yes" value="true" /><label>&nbsp;</label><label>Yes</label><label>&nbsp;</label><input type="checkbox" id="question10no" @bind="question10no" value="true" /><label>&nbsp;</label><label>No</label></center>
+        <center><span hidden="@(!errors)" style="color: red; font-family: Arial; font-size:15px" >Insurance cannot be added</span></center>
+        <center><button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" @onclick="CalculateInsurance">Save</button></center>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@code {
+    [Parameter]
+    public int CustomerId { get; set; }
+    Customer customer;
+    RetailCustomer RetailCustomer;
+    CorpoCustomer CorpoCustomer;
+
+    bool question1yes;
+    bool question1no;
+    bool question2yes;
+    bool question2no;
+    bool question3yes;
+    bool question3no;
+    bool question4yes;
+    bool question4no;
+    bool question5yes;
+    bool question5no;
+    bool question6yes;
+    bool question6no;
+    bool question7yes;
+    bool question7no;
+    bool question8yes;
+    bool question8no;
+    bool question9yes;
+    bool question9no;
+    bool question10yes;
+    bool question10no;
+    double Price = 3000.00;
+
+    bool errors = false;
+
+    protected override void OnInitialized()
+    {
+        customer = Customer.Customers.First(e => e.CustomerId == CustomerId);
+        if (customer.GetCustomerData().Contains("Pesel:"))
+            RetailCustomer = (RetailCustomer)customer;
+        else
+            CorpoCustomer = (CorpoCustomer)customer;
+    }
+
+    private async void CalculateInsurance()
+    {
+        int counterYes = 0;
+        if(question1yes != false)
+            counterYes++;
+        if (question2yes != false)
+            counterYes++;
+        if (question3yes != false)
+            counterYes++;
+        if (question4yes != false)
+            counterYes++;
+        if (question5yes != false)
+            counterYes++;
+        if (question6yes != false)
+            counterYes++;
+        if (question7yes != false)
+            counterYes++;
+        if (question8yes != false)
+            counterYes++;
+        if (question9yes != false)
+            counterYes++;
+        if (question10yes != false)
+            counterYes++;
+
+        if (counterYes >= 3)
+            errors = true;
+        else
+        {
+            bool[] answers = new bool[10];
+            if (question1no != false)
+                answers[0] = false;
+            else
+                answers[0] = true;
+            if (question2no != false)
+                answers[1] = false;
+            else
+                answers[1] = true;
+            if (question3no != false)
+                answers[2] = false;
+            else
+                answers[2] = true;
+            if (question4no != false)
+                answers[3] = false;
+            else
+                answers[3] = true;
+            if (question5no != false)
+                answers[4] = false;
+            else
+                answers[4] = true;
+            if (question6no != false)
+                answers[5] = false;
+            else
+                answers[5] = true;
+            if (question7no != false)
+                answers[6] = false;
+            else
+                answers[6] = true;
+            if (question8no != false)
+                answers[7] = false;
+            else
+                answers[7] = true;
+            if (question9no != false)
+                answers[8] = false;
+            else
+                answers[8] = true;
+            if (question10no != false)
+                answers[9] = false;
+            else
+                answers[9] = true;
+
+
+
+            Survey survey = new Survey(answers);
+            LifeInsurance LifeInsurance;
+            int customerAge = DateTime.Now.Year - Int32.Parse($"19{RetailCustomer.Pesel[0]}{RetailCustomer.Pesel[1]}");
+            LifeInsurance = new LifeInsurance(Insurance.Insurances.OrderBy(e => e.InsuranceId).Last().InsuranceId + 2, RetailCustomer.Name, RetailCustomer.Surname, RetailCustomer.Pesel, Price, DateTime.Now, DateTime.Now.AddYears(1), $"L{DateTime.Now.Date}{RetailCustomer.Pesel}", customerAge, survey);
+            customer.Insurances.Add(LifeInsurance);
+            Insurance.Insurances.Add(LifeInsurance);
+
+            InsurancesModel SerializeInsurance = new InsurancesModel
+                {
+                    InsuranceId = LifeInsurance.InsuranceId,
+                    Name = LifeInsurance.Name,
+                    Surname = LifeInsurance.Surname,
+                    Pesel = LifeInsurance.PESEL,
+                    Price = LifeInsurance.Price,
+                    SignDate = LifeInsurance.SignDate,
+                    EndDate = LifeInsurance.EndDate,
+                    InsuranceNumber = LifeInsurance.InsuranceNumber,
+                    AutoCasco = false,
+                    VehicleId = 0,
+                    CustomerAge = LifeInsurance.CustomerAge,
+                    Survey1 = answers[0],
+                    Survey2 = answers[1],
+                    Survey3 = answers[2],
+                    Survey4 = answers[3],
+                    Survey5 = answers[4],
+                    Survey6 = answers[5],
+                    Survey7 = answers[6],
+                    Survey8 = answers[7],
+                    Survey9 = answers[8],
+                    Survey10 = answers[9],
+                    City = " ",
+                    PostalCode = " ",
+                    Street = " ",
+                    HouseNumber = " ",
+                    FlatNumber = " ",
+                    CustomerId = customer.CustomerId
+                };
+
+            List<InsurancesModel> model = await Http.GetFromJsonAsync<List<InsurancesModel>>("sample-data/Insurances.json");
+            model.Add(SerializeInsurance);
+            await Http.PostAsJsonAsync<List<InsurancesModel>>("https://localhost:44394/SaveLife", model);
+            NavManager.NavigateTo("/Dashboard");
+        }
+
+    }
+}

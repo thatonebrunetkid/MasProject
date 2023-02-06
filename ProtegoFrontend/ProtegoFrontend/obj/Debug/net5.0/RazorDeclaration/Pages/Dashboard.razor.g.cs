@@ -110,19 +110,17 @@ using System.Text;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Dashboard/{CustomerId:int}")]
-    public partial class Dashboard : Microsoft.AspNetCore.Components.ComponentBase
+    [global::Microsoft.AspNetCore.Components.RouteAttribute("/Dashboard")]
+    public partial class Dashboard : global::Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
-        protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
+        protected override void BuildRenderTree(global::Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
 #nullable restore
-#line 388 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
+#line 393 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
        
-    [Parameter]
-    public int CustomerId { get; set; }
     private Customer customer;
     private RetailCustomer retailCustomer;
     private CorpoCustomer corpoCustomer;
@@ -131,21 +129,21 @@ using System.Text;
 
     protected override void OnInitialized()
     {
-        customer = Customer.Customers.First(e => e.CustomerId == CustomerId);
-        if (customer.GetCustomerData().Contains("Pesel: "))
-            retailCustomer = (RetailCustomer)customer;
-        else
-            corpoCustomer = (CorpoCustomer)customer;
-    }
-
-    private int GetBoughtProductsNumber()
-    {
-        return customer.Insurances.Count();
     }
 
     void SetNumber(string value)
     {
         DetailedInsuranceDetails = value;
+    }
+
+    void SetCustomer(string customerNumber)
+    {
+        DetailedInsuranceDetails = "";
+        customer = Customer.Customers.First(e => e.ContactNumber == customerNumber);
+        if (customer.GetCustomerData().Contains("Pesel: "))
+            retailCustomer = (RetailCustomer)customer;
+        else
+            corpoCustomer = (CorpoCustomer)customer;
     }
 
     private string GetInsuranceDetails()
@@ -160,9 +158,15 @@ using System.Text;
             return "";
     }
 
+    private void NavigateToLifeInsurance()
+    {
+        NavManager.NavigateTo($"/LifeInsurance/{customer.CustomerId}");
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavManager { get; set; }
     }
 }
 #pragma warning restore 1591

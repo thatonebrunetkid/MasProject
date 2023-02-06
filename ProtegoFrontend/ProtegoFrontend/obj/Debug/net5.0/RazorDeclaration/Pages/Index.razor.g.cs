@@ -105,25 +105,34 @@ using Blazored.Typeahead;
 #nullable disable
 #nullable restore
 #line 5 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+using ProtegoFrontend.Backoffice.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
 using ProtegoFrontend.Connection;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    [global::Microsoft.AspNetCore.Components.RouteAttribute("/")]
+    public partial class Index : global::Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
-        protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
+        protected override void BuildRenderTree(global::Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
 #nullable restore
-#line 40 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+#line 35 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
       
-    private Customer customer;
+    private string Login { get; set; } = "";
+    private string Password { get; set; } = "";
     protected async override void OnInitialized()
     {
+        DataManipulator.LoadAuthenticateData(await Http.GetFromJsonAsync<List<Authenticate>>("sample-data/Authenticate.json"));
         DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
         DataManipulator.LoadBrandsData(await Http.GetFromJsonAsync<List<BrandsModel>>("sample-data/Brands.json"));
         DataManipulator.LoadModelsData(await Http.GetFromJsonAsync<List<ModelsModel>>("sample-data/Models.json"));
@@ -138,8 +147,9 @@ using ProtegoFrontend.Connection;
 
     private void GetCustomerAndChangePage()
     {
-        if (customer != null)
-            NavManager.NavigateTo($"/Dashboard/{customer.CustomerId}");
+       if(AuthenticateModel.Users.First(e => e.Login == this.Login && e.Password == this.Password) != null)
+            NavManager.NavigateTo($"/Dashboard");
+
     }
 
 

@@ -3,6 +3,7 @@ using MasProjekt.Backoffice.Models.Customers;
 using MasProjekt.Backoffice.Models.Insurance;
 using MasProjekt.Backoffice.Models.Model;
 using MasProjekt.Backoffice.Models.Vehicle;
+using ProtegoFrontend.Backoffice.Models;
 using ProtegoFrontend.Connection;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,15 @@ namespace MasProjekt.Backoffice.Connection
         private static readonly string BrandsFileLocation = "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoBackend\\Data\\Brands.txt";
         private static readonly string ModelsFileLocation = "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoBackend\\Data\\Models.txt";
         private static readonly string InsurancesFileLocation = "D:\\Users\\mateu\\source\\repos\\MasProject\\ProtegoFrontend\\ProtegoBackend\\Data\\Insurances.txt";
+
+
+        public static void LoadAuthenticateData(List<Authenticate> LoginsList)
+        {
+            foreach(var login in LoginsList)
+            {
+                AuthenticateModel.AddUser(new AuthenticateModel(login.Login, login.Password));
+            }
+        }
 
 
         public static void LoadCustomerData(List<CustomersModel> CustomersList)
@@ -105,6 +115,7 @@ namespace MasProjekt.Backoffice.Connection
 
         public static void LoadInsurancesData(List<InsurancesModel> InsurancesList)
         {
+            Insurance.Insurances.Clear();
             foreach(InsurancesModel insurance in InsurancesList)
             {
                 if (insurance.InsuranceNumber.ToCharArray()[0] == 'O')
@@ -145,7 +156,5 @@ namespace MasProjekt.Backoffice.Connection
                 }
             }
         }
-
-        
     }
 }

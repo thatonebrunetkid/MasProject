@@ -1,0 +1,24 @@
+﻿#wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+#first {
+    width: auto;
+    float: left;
+    border-radius: 25px;
+    height: 50%;
+}
+
+#second {
+    overflow: hidden;
+    border-radius: 25px;
+    height: 50%;
+}
+
+.inputStyle {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}

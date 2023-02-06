@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32611.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtegoFrontend", "ProtegoFrontend\ProtegoFrontend.csproj", "{6D9FB6B1-4C40-4F90-8AB0-4FA1009F4A48}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileApi", "FileApi\FileApi.csproj", "{AD9765F2-B829-4E78-93E0-33B9EA399A6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6D9FB6B1-4C40-4F90-8AB0-4FA1009F4A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D9FB6B1-4C40-4F90-8AB0-4FA1009F4A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D9FB6B1-4C40-4F90-8AB0-4FA1009F4A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9765F2-B829-4E78-93E0-33B9EA399A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9765F2-B829-4E78-93E0-33B9EA399A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9765F2-B829-4E78-93E0-33B9EA399A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9765F2-B829-4E78-93E0-33B9EA399A6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

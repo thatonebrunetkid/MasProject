@@ -20,6 +20,11 @@
   <ItemGroup>
     <None Remove="ChartJs.Blazor" />
     <None Remove="ChartJs.Blazor.Fork" />
+    <None Remove="Pages\LifeInsurancePage.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\LifeInsurancePage.razor.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\Assets\logo.png" />

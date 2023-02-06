@@ -1,0 +1,12 @@
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\bin\Debug\net5.0\FilesManager.deps.json
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\bin\Debug\net5.0\FilesManager.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\bin\Debug\net5.0\FilesManager.pdb
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.csproj.AssemblyReference.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.AssemblyInfoInputs.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.AssemblyInfo.cs
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.csproj.CoreCompileInputs.cache
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\refint\FilesManager.dll
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\FilesManager.pdb
+D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\FilesManager\obj\Debug\net5.0\ref\FilesManager.dll
