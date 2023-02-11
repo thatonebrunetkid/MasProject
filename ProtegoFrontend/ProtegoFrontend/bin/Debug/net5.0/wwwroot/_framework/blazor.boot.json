@@ -225,13 +225,13 @@
       "mscorlib.dll": "sha256-zMI\/dXK7DoZZ9Qm9U9\/jRN4iQ9Ss3w8\/rwQQxC6SW9Y=",
       "netstandard.dll": "sha256-W3q3PN+lpRB+tRJEIhtMgYOGFv0pauEeeCS9iIRkKAM=",
       "System.Private.CoreLib.dll": "sha256-9rUJv1mXEQdGt\/kWiJ1ITPPzp3cAi3lSmqHVTisp7w0=",
-      "ProtegoFrontend.dll": "sha256-H0mhGSsUetnzgGJOnrIOgD811slO739At7zSr+RgoOw="
+      "ProtegoFrontend.dll": "sha256-BzheS713QW\/tk3WRGIy6z+Kr4RXHApW0A6\/614S6AkA="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "ProtegoFrontend.pdb": "sha256-kUS6phV4uQpFUkG40og4WnGR3mt3w70tgJiUhiPsrSo="
+      "ProtegoFrontend.pdb": "sha256-hfepGwDQje5MCSDMTs+nhHbQuAeSssaWzY77GIQbZkw="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-8oJip361m8OrfLRJOuIeswWKaoxtT27\/wINCxhn+s4c=",

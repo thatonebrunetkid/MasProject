@@ -98,14 +98,14 @@ using MasProjekt.Backoffice.Models.Customers;
 #nullable disable
 #nullable restore
 #line 3 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\LifeInsurancePage.razor"
-using MasProjekt.Backoffice.Models.Insurance;
+using Newtonsoft.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\LifeInsurancePage.razor"
-using Newtonsoft.Json;
+using ProtegoFrontend.Backoffice.Models;
 
 #line default
 #line hidden
@@ -147,13 +147,11 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 100 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\LifeInsurancePage.razor"
+#line 104 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\LifeInsurancePage.razor"
        
     [Parameter]
     public int CustomerId { get; set; }
     Customer customer;
-    RetailCustomer RetailCustomer;
-    CorpoCustomer CorpoCustomer;
 
     bool question1yes;
     bool question1no;
@@ -179,13 +177,9 @@ using System.IO;
 
     bool errors = false;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        customer = Customer.Customers.First(e => e.CustomerId == CustomerId);
-        if (customer.GetCustomerData().Contains("Pesel:"))
-            RetailCustomer = (RetailCustomer)customer;
-        else
-            CorpoCustomer = (CorpoCustomer)customer;
+        customer = await Http.GetFromJsonAsync<Customer>($"https://localhost:44394/controller/Client/{CustomerId}");
     }
 
     private async void CalculateInsurance()
@@ -258,49 +252,34 @@ using System.IO;
             else
                 answers[9] = true;
 
+            string finalAnswers = "";
+            foreach(var answer in answers)
+            {
+                StringBuilder bulider = new StringBuilder();
+                if (answer == true)
+                    bulider.Append("true;");
+                else
+                    bulider.Append("false;");
+
+            }
 
 
-            Survey survey = new Survey(answers);
-            LifeInsurance LifeInsurance;
-            int customerAge = DateTime.Now.Year - Int32.Parse($"19{RetailCustomer.Pesel[0]}{RetailCustomer.Pesel[1]}");
-            LifeInsurance = new LifeInsurance(Insurance.Insurances.OrderBy(e => e.InsuranceId).Last().InsuranceId + 2, RetailCustomer.Name, RetailCustomer.Surname, RetailCustomer.Pesel, Price, DateTime.Now, DateTime.Now.AddYears(1), $"L{DateTime.Now.Date}{RetailCustomer.Pesel}", customerAge, survey);
-            customer.Insurances.Add(LifeInsurance);
-            Insurance.Insurances.Add(LifeInsurance);
 
-            InsurancesModel SerializeInsurance = new InsurancesModel
+            Policies NewPolicy = new Policies()
                 {
-                    InsuranceId = LifeInsurance.InsuranceId,
-                    Name = LifeInsurance.Name,
-                    Surname = LifeInsurance.Surname,
-                    Pesel = LifeInsurance.PESEL,
-                    Price = LifeInsurance.Price,
-                    SignDate = LifeInsurance.SignDate,
-                    EndDate = LifeInsurance.EndDate,
-                    InsuranceNumber = LifeInsurance.InsuranceNumber,
+                    Price = Price,
+                    SignDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddYears(1),
+                    PolicyNumber = $"L{customer.Pesel}{DateTime.Now.Date}",
                     AutoCasco = false,
+                    CustomerAge = DateTime.Now.Year - Int32.Parse($"19{customer.Pesel[0]}{customer.Pesel[1]}"),
+                    MedicalSurvey = finalAnswers.ToString(),
+                    Adres = customer.Adress,
+                    ClientId = customer.ClientId,
                     VehicleId = 0,
-                    CustomerAge = LifeInsurance.CustomerAge,
-                    Survey1 = answers[0],
-                    Survey2 = answers[1],
-                    Survey3 = answers[2],
-                    Survey4 = answers[3],
-                    Survey5 = answers[4],
-                    Survey6 = answers[5],
-                    Survey7 = answers[6],
-                    Survey8 = answers[7],
-                    Survey9 = answers[8],
-                    Survey10 = answers[9],
-                    City = " ",
-                    PostalCode = " ",
-                    Street = " ",
-                    HouseNumber = " ",
-                    FlatNumber = " ",
-                    CustomerId = customer.CustomerId
+                    Vehicle = null
                 };
-
-            List<InsurancesModel> model = await Http.GetFromJsonAsync<List<InsurancesModel>>("sample-data/Insurances.json");
-            model.Add(SerializeInsurance);
-            await Http.PostAsJsonAsync<List<InsurancesModel>>("https://localhost:44394/SaveLife", model);
+            await Http.PostAsJsonAsync<Policies>("https://localhost:44394/controller/Insurance/New", NewPolicy);
             NavManager.NavigateTo("/Dashboard");
         }
 

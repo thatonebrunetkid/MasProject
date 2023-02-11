@@ -1,8 +1,9 @@
 ﻿@page "/Dashboard"
 @using MasProjekt.Backoffice.Models.Customers
-@using MasProjekt.Backoffice.Models.Insurance
 @using System.Text
+@using ProtegoFrontend.Backoffice.Models;
 @inject NavigationManager NavManager
+@inject HttpClient Http
 
 <style>
     body {
@@ -16,65 +17,72 @@
         <h1 style="font-family: Arial">Customer information</h1>
     </div>
     <div id="first" style="background-color: white; margin: 20px">
-        @foreach(Customer customer in Customer.Customers)
+            @if(customers.Count > 0)
+            {
+        @foreach (Customer customer in customers)
         {
-          <table style="margin: 0 auto; vertical-align: central">
-          <tr style="text-align: center">
-            <button class="listedButton" style="font-size: 15px" @onclick="@(_ => SetCustomer(customer.ContactNumber))">@customer.GetCustomerData()</button>
-          </tr>
-      </table>
+            <table style="margin: 0 auto; vertical-align: central">
+                <tr style="text-align: center">
+                        <button class="listedButton" style="font-size: 15px" @onclick="@(_ => SetCustomer(customer.ContactNumber))">@GetCustomerData(customer)</button>
+                </tr>
+            </table>
         }
+    
+            }else{
+                    <center><img style="width: 25%" src="Assets/nothingHere.gif" /></center>
+                    <h2 style="font-family: Arial; font-size: 24px; text-align: center">Nothing is here</h2>
+            }
     </div>
-    <div id="second" style="background-color: white; margin: 20px">
-       @if(customer != null)
+   <div id="second" style="background-color: white; margin: 20px">
+       @if(CurrentCustomer != null)
         {
-            @if (customer.GetCustomerData().Contains("NIP: "))
+            @if (CurrentCustomer.Nip != "")
             {
                 <table style="margin: 20px">
                     <tr>
                         <td style="font-family: Arial; font-size: 24px; float: left">Company Name: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.CompanyName</td>
+                        <td style="font-family: Arial; font-size: 24px;">@CurrentCustomer.CompanyName</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px; float: left">NIP: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.NIP</td>
+                        <td style="font-family: Arial; font-size: 24px;">@CurrentCustomer.Nip</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px; float: left">Adress: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Adress.ToString()</td>
+                        <td style="font-family: Arial; font-size: 24px;">@CurrentCustomer.Adress.ToString()</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px; float: left">Email: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@corpoCustomer.Email</td>
+                        <td style="font-family: Arial; font-size: 24px;">@CurrentCustomer.Email</td>
                     </tr>
                 </table>
             }
-            @if (customer.GetCustomerData().Contains("Pesel: "))
+            @if (CurrentCustomer.Pesel != "")
             {
                 <table style="margin: 20px">
                     <tr>
                         <td style="font-family: Arial; font-size: 24px; float: left">  Name: </td>
-                        <td style="font-family: Arial; font-size: 24px;">@retailCustomer.Name</td>
+                        <td style="font-family: Arial; font-size: 24px;">@CurrentCustomer.Name</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px">  Surname: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Surname</td>
+                        <td style="font-family: Arial; font-size: 24px">@CurrentCustomer.Surname</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px">  PESEL: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Pesel</td>
+                        <td style="font-family: Arial; font-size: 24px">@CurrentCustomer.Pesel</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px">  Number: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.ContactNumber</td>
+                        <td style="font-family: Arial; font-size: 24px">@CurrentCustomer.ContactNumber</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px">  Email: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Email</td>
+                        <td style="font-family: Arial; font-size: 24px">@CurrentCustomer.Email</td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 24px">  Adress: </td>
-                        <td style="font-family: Arial; font-size: 24px">@retailCustomer.Adress.ToString()</td>
+                        <td style="font-family: Arial; font-size: 24px">@CurrentCustomer.Adress.ToString()</td>
                     </tr>
                 </table>
             }
@@ -92,15 +100,15 @@
 <div id="wrapper">
     <div id="first" style="background-color: white; margin: 20px">
        <div style="margin: 20px">
-          @if(customer != null)
+          @if(CurrentCustomer != null)
             {
-                @if (customer.Insurances.Count() > 0)
+                @if (CurrentCustomer.Policies.Count() > 0)
                 {
-                    @foreach (var insuranceProduct in customer.Insurances)
+                    @foreach (var insuranceProduct in CurrentCustomer.Policies)
                     {
                         <table style="margin: 0 auto; vertical-align: central">
                             <tr style="text-align: center">
-                                <button class="listedButton" @onclick="@(_=>SetNumber(insuranceProduct.GetInsuranceBasicInformation()))">@insuranceProduct.GetInsuranceBasicInformation()</button>
+                                <button class="listedButton" @onclick="@(_=>SetNumber(insuranceProduct))">@GetInsuranceBasicInformations(insuranceProduct)</button>
                             </tr>
                         </table>                    }
                 }
@@ -116,9 +124,9 @@
             }
         </div>
           <div style="vertical-align: central">
-           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" disabled="@(customer == null ? true : false)">New Car Insurance</button>
-           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" disabled="@(customer == null ? true : false)">New House Insurance</button>
-           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" @onclick="NavigateToLifeInsurance" disabled = "@(customer == null ? true : false)">New Life Insurance</button>
+           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" disabled="@(CurrentCustomer == null ? true : false)">New Car Insurance</button>
+           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" disabled="@(CurrentCustomer == null ? true : false)">New House Insurance</button>
+           <button style="background-color:deepskyblue; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; padding: 15px 32px;" @onclick="NavigateToLifeInsurance" disabled = "@(CurrentCustomer == null ? true : false)">New Life Insurance</button>
 
           </div>
 
@@ -127,261 +135,259 @@
     <div id="second" style="background-color: white; margin: 20px">
         <div style="margin: 20px">
            <table style="margin: 0 auto; vertical-align: central">
-               @if(DetailedInsuranceDetails != "")
+               @if(CurrentPolicy != null)
                 {
-                    var details = GetInsuranceDetails();
-                    var splitted = details.Split('|');
-                    @if (splitted[6].ToCharArray()[0] == 'O')
+                    @if (CurrentPolicy.PolicyNumber[0] == 'O')
                     {
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[0]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">name: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Name</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Surname: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[1]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">surname: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Surname</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">PESEL: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[2]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">pesel: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Pesel</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Price: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[3]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">price: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Price</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Sign Date: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[4]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">sign date: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.SignDate</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">End Date: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[5]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">end date: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.EndDate</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">number: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.PolicyNumber</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Auto Casco: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">auto casco: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.AutoCasco</td>
                         </tr>
                         <h2></h2>
-                        <h2 style="text-align: center">Car Details</h2>
-                        var carSplitted = ((MotorInsurance)(customer.Insurances.First(e => e.InsuranceNumber == splitted[6]))).Vehicle.GetVehicleData().Split(" | ");
-                        @if(carSplitted.Count() == 3)
+                        <h2 style="text-align: center">car details</h2>
+                        @if(CurrentPolicy.Vehicle.Frame != "")
                         {
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Production Date: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[0]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">production date: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.ProductionDate</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">License Plates Number: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[1]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">license plates number: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.LicensePlatesNumber</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Frame Number: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[2]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">frame number: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.Frame</td>
                             </tr>
-                        }else if(carSplitted.Count() == 7)
+                        }else if(CurrentPolicy.Vehicle.MaximumAllowableAxleLoad != 0)
                         {
                              <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Production Date: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[0]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">production date: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.ProductionDate</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">License Plates Number: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[1]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">license plates number: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.LicensePlatesNumber</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">VIN: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[2]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">vin: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.Vin</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Import Country: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[3]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">import country: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.ImportCountry</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">First Registration Date: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[4]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">first registration date: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.FirstRegistrationDate</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Mileage Count: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[5]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">mileage count: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.MileageCount</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Maximum Allowable Axle Load: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[6]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">maximum allowable axle load: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.MaximumAllowableAxleLoad</td>
                             </tr>
-                        }else if(carSplitted.Count() == 8)
+                        }else if(CurrentPolicy.Vehicle.MaximumAllowableAxleLoad == 0)
                         {
                               <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Production Date: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[0]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">production date: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.ProductionDate</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">License Plates Number: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[1]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">license plates number: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.LicensePlatesNumber</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">VIN: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[2]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">vin: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.Vin</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Import Country: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[3]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">import country: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.ImportCountry</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">First Registration Date: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[4]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">first registration date: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.FirstRegistrationDate</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Mileage Count: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[5]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">mileage count: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.MileageCount</td>
                             </tr> 
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Is Hook: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[6]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">is hook: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.IsHook</td>
                             </tr>
                             <tr>
-                                <td style="font-family: Arial; font-size: 24px; float: left">Is LPG: </td>
-                                <td style="font-family: Arial; font-size: 24px;">@carSplitted[7]</td>
+                                <td style="font-family: arial; font-size: 24px; float: left">is lpg: </td>
+                                <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Vehicle.IsLpg</td>
                             </tr>
                         }
 
-                }else if(splitted[6].ToCharArray()[0] == 'H')
+                }else if(CurrentPolicy.PolicyNumber[0] == 'H')
                     {
                          <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[0]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">name: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Name</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Surname: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[1]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">surname: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Surname</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">PESEL: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[2]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">pesel: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Pesel</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Price: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[3]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">price: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Price</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Sign Date: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[4]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">sign date: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.SignDate</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">End Date: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[5]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">end date: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.EndDate</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">number: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.PolicyNumber</td>
                         </tr>
 
-                        <h2 style="text-align: center">Insured House Adress</h2>
+                        <h2 style="text-align: center">insured house adress</h2>
+                        
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">City: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">city: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Adres.Split(';')[0]</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Postal Code: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[8]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">postal code: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Adres.Split(';')[1]</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Street: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[9]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">street: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Adres.Split(';')[2]</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">House Number: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[10]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">house number: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Adres.Split(';')[3]</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Flat Number: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[11]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">flat number: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Adres.Split(';')[4]</td>
                         </tr>
 
                     }else
                     {
                          <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Name: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[0]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">name: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Name</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Surname: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[1]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">surname: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Surname</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">PESEL: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[2]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">pesel: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentCustomer.Pesel</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Price: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[3]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">price: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.Price</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Sign Date: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[4]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">sign date: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.SignDate</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">End Date: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[5]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">end date: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.EndDate</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Number: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[6]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">number: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.PolicyNumber</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Customer Age: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[7]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">customer age: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.CustomerAge</td>
                         </tr>
-                        
-                        <h2>Medical Survey Details</h2>
-                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Pensioner: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[8]</td>
+
+                        <h2>medical survey details</h2>
+                        <tr>
+                            <td style="font-family: arial; font-size: 24px; float: left">pensioner: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[0]</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Acciddent Victim: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[9]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">acciddent victim: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[1]</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Surgery: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[10]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">surgery: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[2]</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Overweight: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[11]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">overweight: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[3]</td>
                         </tr>  
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Smoker: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[12]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">smoker: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[4]</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Alcohol Usage: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[13]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">alcohol usage: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[5]</td>
                         </tr> 
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Drugs usage: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[14]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">drugs usage: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[6]</td>
                         </tr>
                          <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Coronary artery disease: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[15]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">coronary artery disease: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[7]</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Hypertension: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[16]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">hypertension: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[8]</td>
                         </tr>
                         <tr>
-                            <td style="font-family: Arial; font-size: 24px; float: left">Hypertension in family: </td>
-                            <td style="font-family: Arial; font-size: 24px;">@splitted[17]</td>
+                            <td style="font-family: arial; font-size: 24px; float: left">hypertension in family: </td>
+                            <td style="font-family: arial; font-size: 24px;">@CurrentPolicy.MedicalSurvey.Split(';')[9]</td>
                         </tr>
                     }
                 } else
                 {
-                    <center><img style="width: 25%" src="Assets/select.gif" /></center>
-                    <h2 style="font-family: Arial; font-size: 24px; text-align: center">Select product from left list</h2>
+                    <center><img style="width: 25%" src="assets/select.gif" /></center>
+                    <h2 style="font-family: arial; font-size: 24px; text-align: center">select product from left list</h2>
                 }
             </table>
         </div>
@@ -391,32 +397,42 @@
 
 
 @code {
-    private Customer customer;
-    private RetailCustomer retailCustomer;
-    private CorpoCustomer corpoCustomer;
-    private string DetailedInsuranceDetails = "";
+    private List<Customer> customers;
+    private Customer CurrentCustomer;
+    private Policies CurrentPolicy = null;
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        customers = new List<Customer>();
+        customers = await Http.GetFromJsonAsync<List<Customer>>("https://localhost:44394/controller/Customers");
     }
 
-    void SetNumber(string value)
+    void SetNumber(Policies policy)
     {
-        DetailedInsuranceDetails = value;
+        CurrentPolicy = policy;
     }
 
-    void SetCustomer(string customerNumber)
+    string GetCustomerData(Customer customer)
     {
-        DetailedInsuranceDetails = "";
-        customer = Customer.Customers.First(e => e.ContactNumber == customerNumber);
-        if (customer.GetCustomerData().Contains("Pesel: "))
-            retailCustomer = (RetailCustomer)customer;
+        if (customer.Pesel != "")
+            return $"{customer.Name} | {customer.Surname} | {customer.Pesel} | {customer.ContactNumber}";
         else
-            corpoCustomer = (CorpoCustomer)customer;
+            return $"{customer.CompanyName} | {customer.Nip} | {customer.ContactNumber}";
     }
 
-    private string GetInsuranceDetails()
+    string GetInsuranceBasicInformations(Policies Policy)
+    {
+        return $"{Policy.PolicyNumber} | {Policy.SignDate} | {Policy.EndDate}";
+    }
+
+    void SetCustomer(string contactNumber)
+    {
+        CurrentPolicy = null;
+        CurrentCustomer = customers.First(e => e.ContactNumber == contactNumber);
+    }
+
+   @* private string GetInsuranceDetails()
     {
         if (DetailedInsuranceDetails != "")
         {
@@ -426,10 +442,10 @@
         }
         else
             return "";
-    }
+    }*@
 
     private void NavigateToLifeInsurance()
     {
-        NavManager.NavigateTo($"/LifeInsurance/{customer.CustomerId}");
+        NavManager.NavigateTo($"/LifeInsurance/{CurrentCustomer.ClientId}");
     }
 }

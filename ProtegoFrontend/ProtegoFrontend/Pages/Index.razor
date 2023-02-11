@@ -1,5 +1,4 @@
 ﻿@page "/"
-@using MasProjekt.Backoffice.Connection
 @using MasProjekt.Backoffice.Models.Customers
 @using Blazored.Typeahead
 @using ProtegoFrontend.Backoffice.Models
@@ -37,24 +36,19 @@
     private string Password { get; set; } = "";
     protected async override void OnInitialized()
     {
-        DataManipulator.LoadAuthenticateData(await Http.GetFromJsonAsync<List<Authenticate>>("sample-data/Authenticate.json"));
-        DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
-        DataManipulator.LoadBrandsData(await Http.GetFromJsonAsync<List<BrandsModel>>("sample-data/Brands.json"));
-        DataManipulator.LoadModelsData(await Http.GetFromJsonAsync<List<ModelsModel>>("sample-data/Models.json"));
-        DataManipulator.LoadVehiclesData(await Http.GetFromJsonAsync<List<VehiclesModel>>("sample-data/Vehicles.json"));
-        DataManipulator.LoadInsurancesData(await Http.GetFromJsonAsync<List<InsurancesModel>>("sample-data/Insurances.json"));
+      
     }
 
-    private async Task<IEnumerable<Customer>> SearchCustomer(string searchText)
+   @* private async Task<IEnumerable<Customer>> SearchCustomer(string searchText)
     {
         return await Task.FromResult(Customer.Customers.Where(x => x.ContactNumber.Contains(searchText)).ToList());
-    }
+    }*@
 
-    private void GetCustomerAndChangePage()
+    private async void GetCustomerAndChangePage()
     {
-       if(AuthenticateModel.Users.First(e => e.Login == this.Login && e.Password == this.Password) != null)
+        var result = await Http.GetStringAsync($"https://localhost:44394/controller/Login/{Login}/{Password}");
+        if (result != null)
             NavManager.NavigateTo($"/Dashboard");
-
     }
 
 }

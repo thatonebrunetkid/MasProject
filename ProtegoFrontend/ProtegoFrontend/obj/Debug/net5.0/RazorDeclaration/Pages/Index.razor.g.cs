@@ -84,34 +84,27 @@ using ProtegoFrontend.Shared;
 #nullable disable
 #nullable restore
 #line 2 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
-using MasProjekt.Backoffice.Connection;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 3 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
 using MasProjekt.Backoffice.Models.Customers;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+#line 3 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
 using Blazored.Typeahead;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+#line 4 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
 using ProtegoFrontend.Backoffice.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+#line 5 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
 using ProtegoFrontend.Connection;
 
 #line default
@@ -126,30 +119,29 @@ using ProtegoFrontend.Connection;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 35 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+#line 34 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
       
     private string Login { get; set; } = "";
     private string Password { get; set; } = "";
     protected async override void OnInitialized()
     {
-        DataManipulator.LoadAuthenticateData(await Http.GetFromJsonAsync<List<Authenticate>>("sample-data/Authenticate.json"));
-        DataManipulator.LoadCustomerData(await Http.GetFromJsonAsync<List<CustomersModel>>("sample-data/Customers.json"));
-        DataManipulator.LoadBrandsData(await Http.GetFromJsonAsync<List<BrandsModel>>("sample-data/Brands.json"));
-        DataManipulator.LoadModelsData(await Http.GetFromJsonAsync<List<ModelsModel>>("sample-data/Models.json"));
-        DataManipulator.LoadVehiclesData(await Http.GetFromJsonAsync<List<VehiclesModel>>("sample-data/Vehicles.json"));
-        DataManipulator.LoadInsurancesData(await Http.GetFromJsonAsync<List<InsurancesModel>>("sample-data/Insurances.json"));
+      
     }
 
-    private async Task<IEnumerable<Customer>> SearchCustomer(string searchText)
-    {
-        return await Task.FromResult(Customer.Customers.Where(x => x.ContactNumber.Contains(searchText)).ToList());
-    }
+   
 
-    private void GetCustomerAndChangePage()
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 45 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Index.razor"
+       
+
+    private async void GetCustomerAndChangePage()
     {
-       if(AuthenticateModel.Users.First(e => e.Login == this.Login && e.Password == this.Password) != null)
+        var result = await Http.GetStringAsync($"https://localhost:44394/controller/Login/{Login}/{Password}");
+        if (result != null)
             NavManager.NavigateTo($"/Dashboard");
-
     }
 
 

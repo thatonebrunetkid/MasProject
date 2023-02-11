@@ -98,14 +98,14 @@ using MasProjekt.Backoffice.Models.Customers;
 #nullable disable
 #nullable restore
 #line 3 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
-using MasProjekt.Backoffice.Models.Insurance;
+using System.Text;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
-using System.Text;
+using ProtegoFrontend.Backoffice.Models;
 
 #line default
 #line hidden
@@ -119,53 +119,61 @@ using System.Text;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 393 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
+#line 399 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
        
-    private Customer customer;
-    private RetailCustomer retailCustomer;
-    private CorpoCustomer corpoCustomer;
-    private string DetailedInsuranceDetails = "";
+    private List<Customer> customers;
+    private Customer CurrentCustomer;
+    private Policies CurrentPolicy = null;
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        customers = new List<Customer>();
+        customers = await Http.GetFromJsonAsync<List<Customer>>("https://localhost:44394/controller/Customers");
     }
 
-    void SetNumber(string value)
+    void SetNumber(Policies policy)
     {
-        DetailedInsuranceDetails = value;
+        CurrentPolicy = policy;
     }
 
-    void SetCustomer(string customerNumber)
+    string GetCustomerData(Customer customer)
     {
-        DetailedInsuranceDetails = "";
-        customer = Customer.Customers.First(e => e.ContactNumber == customerNumber);
-        if (customer.GetCustomerData().Contains("Pesel: "))
-            retailCustomer = (RetailCustomer)customer;
+        if (customer.Pesel != "")
+            return $"{customer.Name} | {customer.Surname} | {customer.Pesel} | {customer.ContactNumber}";
         else
-            corpoCustomer = (CorpoCustomer)customer;
+            return $"{customer.CompanyName} | {customer.Nip} | {customer.ContactNumber}";
     }
 
-    private string GetInsuranceDetails()
+    string GetInsuranceBasicInformations(Policies Policy)
     {
-        if (DetailedInsuranceDetails != "")
-        {
-            string[] split = DetailedInsuranceDetails.Split(" | ");
-            string insuranceNumeber = split[1];
-            return customer.Insurances.First(e => e.InsuranceNumber == insuranceNumeber).GetInsuranceData();
-        }
-        else
-            return "";
+        return $"{Policy.PolicyNumber} | {Policy.SignDate} | {Policy.EndDate}";
     }
+
+    void SetCustomer(string contactNumber)
+    {
+        CurrentPolicy = null;
+        CurrentCustomer = customers.First(e => e.ContactNumber == contactNumber);
+    }
+
+   
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 445 "D:\Users\mateu\source\repos\MasProject\ProtegoFrontend\ProtegoFrontend\Pages\Dashboard.razor"
+       
 
     private void NavigateToLifeInsurance()
     {
-        NavManager.NavigateTo($"/LifeInsurance/{customer.CustomerId}");
+        NavManager.NavigateTo($"/LifeInsurance/{CurrentCustomer.ClientId}");
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavManager { get; set; }
     }
 }
